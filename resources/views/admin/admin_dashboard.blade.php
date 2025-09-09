@@ -188,6 +188,32 @@
 		}
 	});
 
+	/// Main Installment Amount Calculation 
+	const perShareInput = document.querySelector('input[name="per_share_amount"]');
+	const downPaymentInput = document.querySelector('input[name="down_payment"]');
+	const totalInstallmentInput = document.querySelector('input[name="total_installment"]');
+	const perInstallmentInput = document.querySelector('input[name="per_installment_amount"]');
+
+	function calculateInstallment(){
+		const perShare = parseFloat(perShareInput.value) || 0;
+		const downPaymentPercent = parseFloat(downPaymentInput.value) || 0;
+		const totalInstallments = parseInt(totalInstallmentInput.value) || 0;
+
+		if (perShare > 0 && totalInstallments > 0) {
+			const downPaymentAmount = (perShare * downPaymentPercent) / 100;
+			const remainingAmount = perShare - downPaymentAmount;
+			const perInstallment = remainingAmount / totalInstallments;
+
+			perInstallmentInput.value = perInstallment.toFixed(2);
+		}else {
+			perInstallmentInput.value = '';
+		}
+	}
+
+	// Bind the event Listeners 
+	perShareInput.addEventListener('input', calculateInstallment);
+	downPaymentInput.addEventListener('input',calculateInstallment);
+	totalInstallmentInput.addEventListener('input',calculateInstallment);
 
 
 
