@@ -215,7 +215,38 @@
 	downPaymentInput.addEventListener('input',calculateInstallment);
 	totalInstallmentInput.addEventListener('input',calculateInstallment);
 
+	/// Profit Schedul hide and show
+	const scheduleSelete = document.getElementById('profit_schedule');
+	const profitScheduleWrapper = document.getElementById('profitScheduleWrapper');
+	const profitSchedulePeriodWrapper = document.getElementById('profitSchedulePeriodWrapper');
+	const repeatTimeWrapper = document.getElementById('repeatTimeWrapper');
 
+	function toggleSchedulFields(value){
+		profitScheduleWrapper.classList.remove('col-md-6','col-md-12');
+
+		if (value === 'One-Time') {
+			profitSchedulePeriodWrapper.style.display = 'none';
+			repeatTimeWrapper.style.display = 'none';
+			profitScheduleWrapper.classList.add('col-md-12');
+		} else if(value === 'Life-Time'){
+			profitSchedulePeriodWrapper.style.display = 'block';
+			repeatTimeWrapper.style.display = 'none';
+			profitScheduleWrapper.classList.add('col-md-6');
+		} else if(value === 'Repeated-Time'){
+			profitSchedulePeriodWrapper.style.display = 'block';
+			repeatTimeWrapper.style.display = 'block';
+			profitScheduleWrapper.classList.add('col-md-6');
+		} else {
+			profitSchedulePeriodWrapper.style.display = 'none';
+			repeatTimeWrapper.style.display = 'none';
+			profitScheduleWrapper.classList.add('col-md-12');
+		}  
+	}
+	toggleSchedulFields(scheduleSelete.value);
+		scheduleSelete.addEventListener('change', function(){
+			toggleSchedulFields(this.value);
+		});
+	// End 
 
 </script>
 
