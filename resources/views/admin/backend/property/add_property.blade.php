@@ -179,16 +179,16 @@
     <div class="tab-pane fade" id="investment" role="tabpanel">
         <div class="row mt-2">
 
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label>Investment Type <span class="text-danger">*</span></label>
-                    <select name="investment_type" id="investment_type" class="form-control">
-                        <option value="">Select One</option>
-                        <option value="One-Time-Investment">One Time Investment </option>
-                        <option value="Investment-By-Installment">Investment By Installment</option>
-                    </select>
-                </div>
-            </div>
+<div class="col-md-6">
+    <div class="form-group">
+        <label>Investment Type <span class="text-danger">*</span></label>
+        <select name="investment_type" id="investment_type" class="form-control">
+            <option value="">Select One</option>
+            <option value="One-Time-Investment">One Time Investment </option>
+            <option value="Investment-By-Installment">Investment By Installment</option>
+        </select>
+    </div>
+</div>
 
             <div class="col-md-6">
                 <div class="form-group">

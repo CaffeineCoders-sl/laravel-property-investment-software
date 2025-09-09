@@ -175,6 +175,22 @@
 	} 
 	//End Method
 
+	/// Logical Hide & Show
+	const investmentType = document.getElementById('investment_type');
+	const installmentFields = document.getElementById('installmentFields');
+
+	installmentFields.style.display = 'none';
+	investmentType.addEventListener('change',function(){
+		if (this.value === 'Investment-By-Installment') {
+			installmentFields.style.display = 'block';
+		}else {
+			installmentFields.style.display = 'none';
+		}
+	});
+
+
+
+
 </script>
 
 
