@@ -273,11 +273,31 @@ class PropertyController extends Controller
 
      ]);
 
+     /// Multiple Image Upload From Here 
+     $images = $request->file('gallery_images');
+     if (!empty($images) && is_array($images)) {
+        foreach($images as $img){
 
+          $manager = new ImageManager(new Driver());
+          $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+          $imgs = $manager->read($img);
+          $imgs->resize(840,450)->save(public_path('upload/multi_image/'.$make_name));
+          $uploadPath = 'upload/multi_image/'.$make_name; 
 
+          PropertyGalleryImage::insert([
+            'property_id' => $property_id,
+            'image' => $uploadPath,
+            'created_at' => Carbon::now(),
+          ]);
+        } //End Foreach 
+     }
+     /// End Multiple Image Upload From Here  
 
-
-
+       $notification = array(
+            'message' => 'Property Added Successfully',
+            'alert-type' => 'success'
+        ); 
+        return redirect()->route('all.property')->with($notification); 
 
    }
     //End Method 
