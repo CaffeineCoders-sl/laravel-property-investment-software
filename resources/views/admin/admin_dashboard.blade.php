@@ -202,6 +202,33 @@
 	});
 	// End Change % Or USD
 
+	/// Auto Profit Distribution Hide and Show
+
+	const profitDistributionSelete = document.getElementById('profit_distribution');
+	const profitWrapper = document.getElementById('profit_distribution_wrapper');
+	const autoWrapper = document.getElementById('auto_profit_wrapper');
+
+	function toggleProfitFields(value){
+		if (value === 'Manual') {
+			autoWrapper.style.display = 'none';
+			profitWrapper.classList.remove('col-md-6');
+			profitWrapper.classList.add('col-md-12')
+		} else if(value === 'Auto'){
+			autoWrapper.style.display = 'block';
+			profitWrapper.classList.remove('col-md-12');
+			profitWrapper.classList.add('col-md-6')
+		} else {
+			autoWrapper.style.display = 'block';
+			profitWrapper.classList.remove('col-md-12');
+			profitWrapper.classList.add('col-md-6')
+		}
+	}
+
+	toggleProfitFields(profitDistributionSelete.value);
+	profitDistributionSelete.addEventListener('change',function(){
+		toggleProfitFields(this.value);
+	});
+	// End Method 
 
 
 
