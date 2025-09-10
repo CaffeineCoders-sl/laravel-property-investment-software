@@ -221,7 +221,7 @@
         <div class="row mt-2">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Profit Back <span class="text-danger">*</span></label>
+                    <label>Capital Back <span class="text-danger">*</span></label>
                     <div class="input-group">
                         <input type="number" name="profit_back" id="profitBackInput" class="form-control" placeholder="Profit Back Days">
                         <span class="input-group-text">Day</span>
@@ -430,7 +430,26 @@ $(document).ready(function () {
 </script>
 
 
- 
+ <script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const capitalBackSelete = document.getElementById('capital_back');
+        const profitBackInput = document.getElementById('profitBackInput');
+
+        function updateProfitBackState(){
+            if (capitalBackSelete.value === 'No') {
+                profitBackInput.disabled = true;
+                profitBackInput.value = '';
+            }else {
+                profitBackInput.disabled = false;
+            }
+        }
+
+        // Initial state will be setup
+        updateProfitBackState();
+        capitalBackSelete.addEventListener('change',updateProfitBackState);
+
+    });
+ </script>
  
 
 
