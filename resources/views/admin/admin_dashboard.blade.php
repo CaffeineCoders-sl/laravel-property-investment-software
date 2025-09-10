@@ -189,6 +189,24 @@
 		}
 	});
 
+
+	//// Change % Or USD
+	document.getElementById('profit_amount_type').addEventListener('change', function(){
+		const value = this.value;
+		document.querySelector('input[name="minimum_profit_amount"] + .input-group-text').textContent = value;
+
+		document.querySelector('input[name="profit_amount"] + .input-group-text').textContent = value;
+
+		document.querySelector('input[name="auto_profit_distribution"] + .input-group-text').textContent = value;
+
+	});
+	// End Change % Or USD
+
+
+
+
+
+
 	/// Main Installment Amount Calculation 
 	const perShareInput = document.querySelector('input[name="per_share_amount"]');
 	const downPaymentInput = document.querySelector('input[name="down_payment"]');
