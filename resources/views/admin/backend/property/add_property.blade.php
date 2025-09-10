@@ -452,7 +452,38 @@ $(document).ready(function () {
  </script>
  
 
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        const profitTypeSelete = document.querySelector('select[name="profit_type"]');
+        const minimumProfitDiv = document.getElementById('minimumProfit');
+        const fixedProfitDiv = document.getElementById('fixedProfit');
 
+    function toggleProfitFields(){
+        const selectedValue = profitTypeSelete.value;
+
+        minimumProfitDiv.classList.add('col-md-6');
+        fixedProfitDiv.classList.add('col-md-6');
+
+        if (selectedValue === 'Fixed') {
+            fixedProfitDiv.style.display = 'block';
+            minimumProfitDiv.style.display = 'none';
+        } else if (selectedValue === 'Range'){
+            fixedProfitDiv.style.display = 'none';
+            minimumProfitDiv.style.display = 'block';
+        } else {
+            fixedProfitDiv.style.display = 'block';
+            minimumProfitDiv.style.display = 'none';
+        }
+    }
+
+    // Initialize state
+    toggleProfitFields();
+
+    profitTypeSelete.addEventListener('change',toggleProfitFields);
+
+    });
+
+</script>
 
 
 

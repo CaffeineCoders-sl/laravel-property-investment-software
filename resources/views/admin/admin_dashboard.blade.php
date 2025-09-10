@@ -174,6 +174,7 @@
 			document.getElementById('slugInput').value = slug;
 	} 
 	//End Method
+	
 
 	/// Logical Hide & Show
 	const investmentType = document.getElementById('investment_type');
@@ -247,6 +248,8 @@
 			toggleSchedulFields(this.value);
 		});
 	// End 
+
+	
 
 </script>
 
