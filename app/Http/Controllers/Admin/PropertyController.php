@@ -12,6 +12,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\File;
 use App\Models\Property;
 use App\Models\PropertyGalleryImage;
+use Illuminate\Support\Carbon;
 
 class PropertyController extends Controller
 {
@@ -234,7 +235,45 @@ class PropertyController extends Controller
         $per_installment_amount = $remaining / (int) $request->total_installment;
      }
 
-     
+     $property_id = Property::insertGetId([
+
+        'image' => $save_url,
+        'title' => $request->title,
+        'slug' => $request->slug,
+        'location_id' => $request->location_id,
+        'time_id' => $request->time_id,
+        'location_map' => $request->location_map,
+        'details' => $request->details,
+
+        'is_featured' => $request->is_featured,
+        'status' => $request->status,
+        'investment_type' => $request->investment_type,
+        'total_share' => $request->total_share,
+        'per_share_amount' => $request->per_share_amount,
+        'capital_back' => $request->capital_back,
+
+        'profit_back' => $request->profit_back,
+        'profit_type' => $request->profit_type,
+        'total_installment' => $request->total_installment,
+        'down_payment' => $request->down_payment,
+        'per_installment_amount' => $request->per_installment_amount,
+        'installment_late_fee' => $request->installment_late_fee,
+        'time_between_installment' => $request->time_between_installment,
+
+        'profit_amount_type' => $request->profit_amount_type,
+        'minimum_profit_amount' => $request->minimum_profit_amount,
+        'profit_amount' => $request->profit_amount,
+        'profit_distribution' => $request->profit_distribution,
+        'auto_profit_distribution' => $request->auto_profit_distribution,
+        'profit_schedule' => $request->profit_schedule,
+
+        'profit_schedule_period' => $request->profit_schedule_period,
+        'repeat_time' => $request->repeat_time,
+        'created_at' => Carbon::now(), 
+
+     ]);
+
+
 
 
 
