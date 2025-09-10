@@ -205,6 +205,44 @@ class PropertyController extends Controller
    }
    //End Method 
 
+   public function StoreProperty(Request $request){
+
+    $validated = $request->validate([
+        'image' => 'required|image|mimes:png,jpg,jpeg,gif,webp|max:2048',
+        'title' => 'required',
+        'slug' => 'required'
+    ]);
+
+    $save_url = null;
+
+     if ($request->hasFile('image')) {
+          $image = $request->file('image');
+          $manager = new ImageManager(new Driver());
+          $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+          $img = $manager->read($image);
+          $img->resize(555,370)->save(public_path('upload/property/'.$name_gen));
+          $save_url = 'upload/property/'.$name_gen; 
+        }
+
+     // Installment Amount 
+     $per_installment_amount = null;
+     if ($request->investment_type === 'Investment-By-Installment' && $request->total_installment > 0) {
+        $perShare = (float) $request->per_share_amount;
+        $downPayment = (float) $request->down_payment;
+        $downAmount = ($perShare * $downPayment) / 100;
+        $remaining = $perShare - $downAmount;
+        $per_installment_amount = $remaining / (int) $request->total_installment;
+     }
+
+     
+
+
+
+
+
+   }
+    //End Method 
+
 
 
 

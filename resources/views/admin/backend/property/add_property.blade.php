@@ -55,7 +55,7 @@
     </div>
 </header>
 
-    <form action=" " method="POST" enctype="multipart/form-data">
+    <form action="{{ route('store.property') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         <!-- Tabs -->
