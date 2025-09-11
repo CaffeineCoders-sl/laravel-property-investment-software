@@ -430,6 +430,33 @@ class PropertyController extends Controller
    }
     //End Method 
 
+    public function DeleteProperty($id){
+        $property = Property::findOrFail($id);
+
+        // Delete main image 
+        if ($property->image && file_exists(public_path($property->image))) {
+           unlink(public_path($property->image));
+        }
+
+        // delete all gallery images
+        $galleryImages = PropertyGalleryImage::where('property_id',$id)->get();
+        foreach($galleryImages as $img){
+            if ($img->image && file_exists(public_path($img->image))) {
+                unlink(public_path($img->image));
+            }
+        }
+
+        PropertyGalleryImage::where('property_id',$id)->delete();
+        $property->delete();
+
+         $notification = array(
+            'message' => 'Property Delete Successfully',
+            'alert-type' => 'success'
+        ); 
+        return redirect()->back()->with($notification); 
+    }
+    //End Method 
+
 
 
 
