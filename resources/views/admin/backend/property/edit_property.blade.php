@@ -72,7 +72,7 @@
         <div class="form-group text-center">
             <div class="position-relative d-inline-block shadow rounded" style="width: 400px; height: 200px; overflow: hidden;">
                 <!-- Image Preview -->
-                <img id="showImage" src="{{ asset('backend/img/preview.png') }}" class="img-fluid w-100 h-100 object-fit-cover" alt="Preview">
+                <img id="showImage" src="{{ asset($editData->image) }}" class="img-fluid w-100 h-100 object-fit-cover" alt="Preview">
 
                 <!-- Upload Button -->
                 <label for="image" class="position-absolute bottom-0 end-0 m-2 bg-primary p-2 rounded-circle text-white" style="cursor:pointer;">
@@ -97,14 +97,14 @@
         <!-- Title -->
         <div class="form-group my-4">
             <label class="fw-bold">Title <span class="text-danger">*</span></label>
-            <input type="text" name="title" id="titleInput" class="form-control" required> 
+            <input type="text" name="title" id="titleInput" class="form-control" value="{{ $editData->title }}"> 
         </div>
 
         <!-- Slug -->
         <div class="form-group position-relative">
             <label class="fw-bold">Slug <span class="text-danger">*</span></label>
             <div class="d-flex align-items-center">
-                <input type="text" name="slug" id="slugInput" class="form-control me-2" required>
+                <input type="text" name="slug" id="slugInput" class="form-control me-2" value="{{ $editData->slug }}">
                 <a href="javascript:void(0);" onclick="generateSlug()" class="text-primary text-decoration-none">
                         <i class="fas fa-link"></i> Make Slug
                 </a>
@@ -112,25 +112,25 @@
         </div>
 
         <div class="row mt-2">
-            <div class="col-md-6">
-                <div class="form-group">
-                <label>Location  <span class="text-danger">*</span></label>
-                <select name="location_id" id="location" class="form-control">
-                    <option value="">Select Location</option>
-                    @foreach ($location as $item)
-                        <option value="{{ $item->id }}">{{ $item->name }}</option>
-                    @endforeach
-                </select>
-                </div>
-                @error('location_id')
-                    <span class="text-danger">{{ $message }}</span>
-                @enderror
+    <div class="col-md-6">
+        <div class="form-group">
+        <label>Location  <span class="text-danger">*</span></label>
+        <select name="location_id" id="location" class="form-control">
+            <option value="">Select Location</option>
+            @foreach ($location as $item)
+                <option value="{{ $item->id }}" {{ $editData->location_id == $item->id ? 'selected' : '' }} >{{ $item->name }}</option>
+            @endforeach
+        </select>
         </div>
+        @error('location_id')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+</div>
 
             <div class="col-md-6">
                 <div class="form-group">
                 <label>Location Map URL <span class="text-danger">*</span></label>
-                <input type="text" name="location_map" class="form-control">
+                <input type="text" name="location_map" class="form-control" value="{{ $editData->location_map }}">
                 </div>
             </div>
         </div>
@@ -138,38 +138,49 @@
         <!-- Gallery Image Upload -->
         <div class="form-group mt-2">
             <label class="fw-bold">Gallery Images <span class="text-danger">(You can add multiple images)</span></label>
-            <!-- File Input (hidden) -->
-            <input type="file" name="gallery_images[]" id="multiImg" class="d-none" accept="image/*" multiple>
 
-            <!-- Clickable Preview Area -->
-            <div class="border border-dashed text-center p-5 rounded" id="preview_img" style="cursor: pointer;">
-                <i class="fas fa-cloud-upload-alt fa-2x text-muted"></i>
-                <p class="mt-2 text-muted">Click to browse multiple images</p>
-            </div>
-            <small class="text-muted d-block mt-2">Supported Files: <strong>.png, .jpg, .jpeg</strong>. Image will be resized into <strong>840x450px</strong></small>
-        </div>
-        
+        <div class="border border-dashed text-center p-5 rounded" id="preview_img" style="cursor: pointer">
+            <div id="preview_img">
+                @foreach ($multiimg as $img)
+   <div class="image-wrapper d-inline-block m-2" id="img-{{ $img->id }}">
+    <img src="{{ asset($img->image) }}" style="width: 150px" height="100px; object-fit:cover;">
+    <a href="javascript:void(0)" class="remove-icon" data-id="{{ $img->id }}">
+        <i class="fa fa-times"></i>
+    </a> 
+            </div> 
+                @endforeach 
+            </div>  
+
+       <i class="fas fa-cloud-upload-alt fa-2x text-muted"></i>
+       <p class="mt-2 text-muted">Click to browse multiple images</p> 
+        </div> 
+  <small class="text-muted d-block mt-2">Supported Files: <strong>.png, .jpg, .jpeg</strong>. Image will be resized into <strong>840x450px</strong></small>
+
+ <input type="file" name="gallery_images[]" id="multiImg" class="d-none" accept="image/*" multiple>
+</div>
+ 
+            
 
             <!-- Details -->
             <div class="form-group mt-4">
             <label class="fw-bold">Details</label>
-            <textarea name="details" id="detailsEditor" class="form-control" rows="8"></textarea>
+            <textarea name="details" id="detailsEditor" class="form-control" rows="8">{{ $editData->details }}</textarea>
             </div>
 
 
         <div class="form-group">
             <label>Is Featured</label>
             <select name="is_featured" class="form-control">
-                <option value="no">No</option>
-                <option value="yes">Yes</option>
+                <option value="no" {{ $editData->is_featured == 'no' ? 'selected' : ''  }} >No</option>
+                <option value="yes" {{ $editData->is_featured == 'yes' ? 'selected' : ''  }}>Yes</option>
             </select>
         </div>
 
         <div class="form-group">
             <label>Status</label>
             <select name="status" class="form-control">
-                <option value="1">Enabled</option>
-                <option value="0">Disabled</option>
+                <option value="1" {{ $editData->status == '1' ? 'selected' : ''  }}>Enabled</option>
+                <option value="0" {{ $editData->status == '0' ? 'selected' : ''  }}>Disabled</option>
             </select>
         </div> 
         
