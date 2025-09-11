@@ -195,8 +195,8 @@
         <label>Investment Type <span class="text-danger">*</span></label>
         <select name="investment_type" id="investment_type" class="form-control">
             <option value="">Select One</option>
-            <option value="One-Time-Investment">One Time Investment </option>
-            <option value="Investment-By-Installment">Investment By Installment</option>
+            <option value="One-Time-Investment" {{ $editData->investment_type == 'One-Time-Investment' ? 'selected' : ''  }}>One Time Investment </option>
+            <option value="Investment-By-Installment" {{ $editData->investment_type == 'Investment-By-Installment' ? 'selected' : ''  }}>Investment By Installment</option>
         </select>
     </div>
 </div>
@@ -204,7 +204,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label>Total Share <span class="text-danger">*</span></label>
-                    <input type="number" name="total_share" class="form-control" placeholder="Enter Total Share">
+                    <input type="number" name="total_share" class="form-control"  value="{{ $editData->total_share }}">
                 </div>
             </div>
         </div>
@@ -213,7 +213,7 @@
                 <div class="form-group">
                     <label>Per Share Amount <span class="text-danger">*</span></label>
                     <div class="input-group">
-                        <input type="number" step="0.01" name="per_share_amount" class="form-control" placeholder="Per Share Amount">
+                        <input type="number" step="0.01" name="per_share_amount" class="form-control" value="{{ $editData->per_share_amount }}">
                         <span class="input-group-text" id="basic-addon2">USD</span>
                     </div>
                 </div>
@@ -223,8 +223,8 @@
                     <label>Capital Back <span class="text-danger">*</span></label>
                     <select name="capital_back" id="capital_back" class="form-control">
                         <option value="">Select One</option>
-                        <option value="Yes">Yes </option>
-                        <option value="No">No</option>
+                        <option value="Yes" {{ $editData->capital_back == 'Yes' ? 'selected' : ''  }}>Yes </option>
+                        <option value="No" {{ $editData->capital_back == 'No' ? 'selected' : ''  }}>No</option>
                     </select>
                 </div>
             </div>
@@ -232,9 +232,9 @@
         <div class="row mt-2">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label>Capital Back <span class="text-danger">*</span></label>
+                    <label>Main Capital Back <span class="text-danger">*</span></label>
                     <div class="input-group">
-                        <input type="number" name="profit_back" id="profitBackInput" class="form-control" placeholder="Profit Back Days">
+                        <input type="number" name="profit_back" id="profitBackInput" class="form-control" value="{{ $editData->profit_back }}" >
                         <span class="input-group-text">Day</span>
                     </div>
                 </div>
@@ -244,8 +244,8 @@
                     <label>Profit Type <span class="text-danger">*</span></label>
                     <select name="profit_type" class="form-control">
                         <option value="">Select One</option>
-                        <option value="Fixed">Fixed</option>
-                        <option value="Range">Range</option>
+                        <option value="fixed" {{ $editData->profit_type == 'fixed' ? 'selected' : ''  }}>Fixed</option>
+                        <option value="range" {{ $editData->profit_type == 'range' ? 'selected' : ''  }}>Range</option>
                     </select>
                 </div>
             </div>
@@ -257,14 +257,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Total Installment</label>
-                        <input type="number" name="total_installment" class="form-control">
+                        <input type="number" name="total_installment" class="form-control" value="{{ $editData->total_installment }}">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label>Down Payment</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="down_payment" class="form-control">
+                            <input type="number" step="0.01" name="down_payment" class="form-control" value="{{ $editData->down_payment }}">
                             <span class="input-group-text">%</span>
                         </div>
                     </div>
@@ -273,7 +273,7 @@
                     <div class="form-group">
                         <label>Per Installment Amount</label>
                         <div class="input-group">
-                            <input type="number" step="0.01" name="per_installment_amount" class="form-control" readonly>
+                            <input type="number" step="0.01" name="per_installment_amount" class="form-control" readonly value="{{ $editData->per_installment_amount }}">
                             <span class="input-group-text">USD</span>
                         </div>
                     </div>
@@ -284,7 +284,7 @@
                     <div class="form-group">
                         <label>Installment Late Fee</label>
                             <div class="input-group">
-                            <input type="number" step="0.01" name="installment_late_fee" class="form-control">
+                            <input type="number" step="0.01" name="installment_late_fee" class="form-control" value="{{ $editData->installment_late_fee }}">
                             <span class="input-group-text">%</span>
                         </div>
                     </div>
@@ -292,7 +292,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Time Between Installment</label>
-                        <input type="text" name="time_between_installment" class="form-control">
+                        <input type="text" name="time_between_installment" class="form-control" value="{{ $editData->time_between_installment }}">
                     </div>
                 </div>
             </div>
@@ -438,6 +438,28 @@ $(document).ready(function () {
         });
     });
 });
+</script>
+
+<script>
+     document.addEventListener('DOMContentLoaded', function() {
+
+    const investmentType = document.getElementById('investment_type');
+	const installmentFields = document.getElementById('installmentFields');
+
+    function toggleInstallmentFields(){
+        if (investmentType.value === 'Investment-By-Installment') {
+			installmentFields.style.display = 'block';
+		}else {
+			installmentFields.style.display = 'none';
+		}
+    }
+
+    toggleInstallmentFields();
+
+    investmentType.addEventListener('change',toggleInstallmentFields);
+
+     });
+
 </script>
 
 
