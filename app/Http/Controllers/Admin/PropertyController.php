@@ -312,6 +312,25 @@ class PropertyController extends Controller
    }
     //End Method 
 
+   public function GalleryImgDelete($id){
+    
+     $image = PropertyGalleryImage::find($id);
+
+        if ($image) {
+            $imagePath = public_path($image->image);
+            if (File::exists($imagePath)) {
+                File::delete($imagePath);
+            }
+
+            $image->delete();
+
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Image not found.']); 
+   }
+    //End Method 
+
 
 
 

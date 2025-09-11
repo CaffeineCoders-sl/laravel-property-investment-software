@@ -517,7 +517,35 @@ $(document).ready(function () {
 
 </script>
 
+{{-- /// Delete multiple Image by Ajax --}}
+<script>
+    document.addEventListener('DOMContentLoaded', function(){
+        document.querySelectorAll('.remove-icon').forEach(function(btn) {
+            btn.addEventListener('click', function(){
+                let id = this.getAttribute('data-id');
+                if(!confirm("Are you sure to delete this image?")) return;
+        
+       fetch("{{ url('property/galleryimage-delete') }}/" + id, {
+            method: 'DELETE',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json',
+            },
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                document.getElementById('img-'+ id).remove();
+            }else{
+                alert(data.message || 'Delete failed');
+            }
+        });
 
+            });
+        });
+    });
+
+</script>
 
  
 
