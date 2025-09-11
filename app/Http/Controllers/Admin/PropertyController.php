@@ -313,7 +313,7 @@ class PropertyController extends Controller
     //End Method 
 
    public function GalleryImgDelete($id){
-    
+
      $image = PropertyGalleryImage::find($id);
 
         if ($image) {
@@ -328,6 +328,105 @@ class PropertyController extends Controller
         }
 
         return response()->json(['success' => false, 'message' => 'Image not found.']); 
+   }
+    //End Method 
+
+
+    public function UpdateProperty(Request $request,$id){
+
+    $validated = $request->validate([ 
+        'title' => 'required',
+        'slug' => 'required'
+    ]);
+
+    $property = Property::findOrFail($id);
+ 
+
+     if ($request->hasFile('image')) {
+           if (File::exists(public_path($property->image))) {
+                File::delete(public_path($property->image));
+            }
+
+          $image = $request->file('image');
+          $manager = new ImageManager(new Driver());
+          $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+          $img = $manager->read($image);
+          $img->resize(555,370)->save(public_path('upload/property/'.$name_gen));
+          $save_url = 'upload/property/'.$name_gen; 
+        }
+
+     // Installment Amount 
+     $per_installment_amount = null;
+     if ($request->investment_type === 'Investment-By-Installment' && $request->total_installment > 0) {
+        $perShare = (float) $request->per_share_amount;
+        $downPayment = (float) $request->down_payment;
+        $downAmount = ($perShare * $downPayment) / 100;
+        $remaining = $perShare - $downAmount;
+        $per_installment_amount = $remaining / (int) $request->total_installment;
+     }
+
+     $property->update([
+
+        'image' => $request->hasFile('image') ? $save_url : $property->image,
+        'title' => $request->title,
+        'slug' => $request->slug,
+        'location_id' => $request->location_id,
+        'time_id' => $request->time_id,
+        'location_map' => $request->location_map,
+        'details' => $request->details,
+
+        'is_featured' => $request->is_featured,
+        'status' => $request->status,
+        'investment_type' => $request->investment_type,
+        'total_share' => $request->total_share,
+        'per_share_amount' => $request->per_share_amount,
+        'capital_back' => $request->capital_back,
+
+        'profit_back' => $request->profit_back,
+        'profit_type' => $request->profit_type,
+        'total_installment' => $request->total_installment,
+        'down_payment' => $request->down_payment,
+        'per_installment_amount' => $request->per_installment_amount,
+        'installment_late_fee' => $request->installment_late_fee,
+        'time_between_installment' => $request->time_between_installment,
+
+        'profit_amount_type' => $request->profit_amount_type,
+        'minimum_profit_amount' => $request->minimum_profit_amount,
+        'profit_amount' => $request->profit_amount,
+        'profit_distribution' => $request->profit_distribution,
+        'auto_profit_distribution' => $request->auto_profit_distribution,
+        'profit_schedule' => $request->profit_schedule,
+
+        'profit_schedule_period' => $request->profit_schedule_period,
+        'repeat_time' => $request->repeat_time, 
+
+     ]);
+
+     /// Multiple Image Upload From Here 
+     $images = $request->file('gallery_images');
+     if (!empty($images) && is_array($images)) {
+        foreach($images as $img){
+
+          $manager = new ImageManager(new Driver());
+          $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+          $imgs = $manager->read($img);
+          $imgs->resize(840,450)->save(public_path('upload/multi_image/'.$make_name));
+          $uploadPath = 'upload/multi_image/'.$make_name; 
+
+          PropertyGalleryImage::create([
+            'property_id' => $property->id,
+            'image' => $uploadPath, 
+          ]);
+        } //End Foreach 
+     }
+     /// End Multiple Image Upload From Here  
+
+       $notification = array(
+            'message' => 'Property Updated Successfully',
+            'alert-type' => 'success'
+        ); 
+        return redirect()->route('all.property')->with($notification); 
+
    }
     //End Method 
 
