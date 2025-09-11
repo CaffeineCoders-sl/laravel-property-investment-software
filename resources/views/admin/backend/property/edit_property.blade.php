@@ -305,8 +305,8 @@
                     <label>Profit Amount Type</label>
                     <select name="profit_amount_type" id="profit_amount_type" class="form-control">
                         <option value="">Select One</option>
-                        <option value="%">% </option>
-                        <option value="USD">USD</option>
+                        <option value="%" {{ $editData->profit_amount_type == '%' ? 'selected' : ''  }}>% </option>
+                        <option value="USD" {{ $editData->profit_amount_type == 'USD' ? 'selected' : ''  }}>USD</option>
                     </select>
                 </div>
             </div>
@@ -314,7 +314,7 @@
                 <div class="form-group">
                     <label>Minimum Profit Amount</label>
                     <div class="input-group">
-                        <input type="number" step="0.01" name="minimum_profit_amount" id="minimum_profit_amount" class="form-control">
+                        <input type="number" step="0.01" name="minimum_profit_amount" id="minimum_profit_amount" class="form-control"  value="{{ $editData->minimum_profit_amount }}">
                         <span class="input-group-text" id="basic-addon2">%</span>
                     </div>
                 </div>
@@ -323,7 +323,7 @@
                 <div class="form-group">
                     <label>Profit Amount</label>
                     <div class="input-group">
-                        <input type="number" step="0.01" name="profit_amount" id="profit_amount" class="form-control">
+                        <input type="number" step="0.01" name="profit_amount" id="profit_amount" class="form-control"  value="{{ $editData->profit_amount }}">
                         <span class="input-group-text" id="basic-addon2">%</span>
                     </div>
                 </div>
@@ -336,8 +336,8 @@
                     <label>Profit Distribution <span class="text-danger">*</span></label>
                     <select name="profit_distribution" id="profit_distribution" class="form-control">
                         <option value="">Select One</option>
-                        <option value="Manual">Manual</option>
-                        <option value="Auto">Auto</option>
+                        <option value="Manual" {{ $editData->profit_distribution == 'Manual' ? 'selected' : ''  }}>Manual</option>
+                        <option value="Auto" {{ $editData->profit_distribution == 'Auto' ? 'selected' : ''  }}>Auto</option>
                     </select>
                 </div>
             </div>
@@ -345,7 +345,7 @@
                 <div class="form-group">
                     <label>Auto Profit Distribution (%)</label>
                     <div class="input-group">
-                        <input type="number" step="0.01" name="auto_profit_distribution" id="auto_profit_distribution" class="form-control">
+                        <input type="number" step="0.01" name="auto_profit_distribution" id="auto_profit_distribution" class="form-control" value="{{ $editData->auto_profit_distribution }}">
                         <span class="input-group-text">%</span>
                     </div>
                 </div>
@@ -354,24 +354,24 @@
 
 
         <div class="row mt-4">
-            <div class="col-md-6" id="profitScheduleWrapper">
-                <div class="form-group">
-                    <label>Profit Schedule <span class="text-danger">*</span></label>
-                    <select name="profit_schedule" id="profit_schedule" class="form-control">
-                        <option value="">Select One</option>
-                        <option value="One-Time">One Time</option>
-                        <option value="Life-Time">Life Time</option>
-                        <option value="Repeated-Time">Repeated Time</option>
-                    </select>
-                </div>
-            </div>
+<div class="col-md-6" id="profitScheduleWrapper">
+    <div class="form-group">
+        <label>Profit Schedule <span class="text-danger">*</span></label>
+        <select name="profit_schedule" id="profit_schedule" class="form-control">
+            <option value="">Select One</option>
+            <option value="One-Time" {{ $editData->profit_schedule == 'One-Time' ? 'selected' : ''  }}>One Time</option>
+            <option value="Life-Time" {{ $editData->profit_schedule == 'Life-Time' ? 'selected' : ''  }}>Life Time</option>
+            <option value="Repeated-Time" {{ $editData->profit_schedule == 'Repeated-Time' ? 'selected' : ''  }}>Repeated Time</option>
+        </select>
+    </div>
+</div>
             <div class="col-md-6" id="profitSchedulePeriodWrapper">
                 <div class="form-group">
                     <label>Profit Schedule Period</label>
                     <select name="time_id" id="profit_schedule_period" class="form-control">
                         <option value="">Select One</option>
                         @foreach ($times as $item)
-                            <option value="{{ $item->id }}">{{ $item->time_name }}</option>
+                            <option value="{{ $item->id }}" {{ $editData->time_id == $item->id ? 'selected' : ''  }}>{{ $item->time_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -380,7 +380,7 @@
         <div class="form-group mt-2" id="repeatTimeWrapper">
             <div class="col-md-12">
                 <label>Repeat Time</label>
-                <input type="number" name="repeat_time" id="repeat_time" class="form-control">
+                <input type="number" name="repeat_time" id="repeat_time" class="form-control" value="{{ $editData->repeat_time }}">
             </div>
         </div>
 
@@ -461,8 +461,7 @@ $(document).ready(function () {
      });
 
 </script>
-
-
+ 
  <script>
     document.addEventListener('DOMContentLoaded', function(){
         const capitalBackSelete = document.getElementById('capital_back');
