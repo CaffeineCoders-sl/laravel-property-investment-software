@@ -302,6 +302,16 @@ class PropertyController extends Controller
    }
     //End Method 
 
+   public function EditProperty($id){
+
+    $editData = Property::find($id);
+    $location = Location::get();
+    $times = Time::get();
+    $multiimg = PropertyGalleryImage::where('property_id',$id)->get();
+    return view('admin.backend.property.edit_property',compact('editData','location','times','multiimg'));
+   }
+    //End Method 
+
 
 
 
