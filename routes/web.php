@@ -8,7 +8,7 @@ use App\Http\Middleware\IsUser;
 use App\Http\Controllers\Admin\PropertyController;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 /// Only User Role Access Started
