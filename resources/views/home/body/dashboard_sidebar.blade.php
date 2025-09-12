@@ -75,7 +75,7 @@
             </li>
             
             <li class="sidebar-menu-list__item">
-                <a class="sidebar-menu-list__link" href="//realvest/user/logout">
+                <a class="sidebar-menu-list__link" href="{{ route('user.logout') }}">
                     <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                     <span class="text">Logout</span>
                 </a>
