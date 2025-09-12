@@ -5,7 +5,7 @@
                 <div class="col-lg-3 col-sm-6">
                     <div class="footer-item">
                         <a href="/" class="footer-item__logo">
-                            <img src="assets/images/logo_dark.png" alt="logo-image">
+                            <img src="{{ asset('frontend/assets/images/logo_dark.png') }}" alt="logo-image">
                         </a>
                         <p class="footer-item__desc">RailVest offers a seamless avenue for establishing a cutting-edge investment platform without necessitating coding expertise within a short time.</p>
                         <ul class="social-list">

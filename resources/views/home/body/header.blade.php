@@ -8,7 +8,7 @@
     <div class="container ">
         <nav class="navbar navbar-expand-lg">
             <a class="navbar-brand logo order-1" href=" ">
-                <img src="assets/images/logo.png" alt="logo">
+                <img src="{{ asset('frontend/assets/images/logo.png') }}" alt="logo">
             </a>
             <button class="navbar-toggler header-button order-3 order-lg-2" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbar-content" aria-expanded="false">
