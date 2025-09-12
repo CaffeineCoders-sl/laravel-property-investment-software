@@ -1,3 +1,7 @@
+ @php
+    $property = App\Models\Property::where('is_featured','yes')->orderBy('id','desc')->limit(3)->get();
+@endphp
+ 
  <section class="all-property py-120 bg-pattern">
     <div class="container ">
         <div class="section-heading style-left">
@@ -11,23 +15,25 @@
             </div>
         </div>
         <div class="all-property__cards">
-            <div class="card border-0 property-horizontal--card">
+    
+   @foreach ($property as $item) 
+   <div class="card border-0 property-horizontal--card">
         <a class="card-img card-img--lg" href="//property/traditional-machiya-townhouse">
-            <img src="{{ asset('frontend/assets/images/65f6d376973821710674806.png') }}"
+            <img src="{{ asset($item->image) }}"
                 alt="property-image">
         </a>
         <div class="card-body py-md-4 px-md-4">
             <div class="card-body-top mb-4">
                 <div class="card-wrapper flex-column">
                     <h4 class="card-title mb-1">
-                        <a href="//property/traditional-machiya-townhouse">
-                            Traditional Machiya Townhouse
+                        <a href="">
+                           {{ $item->title }}
                         </a>
                     </h4>
                     <ul class="card-meta card-meta--one">
                         <li class="card-meta__item">
                             <i class="fas fa-map-marker-alt"></i>
-                            <span class="text">San Francisco, USA</span>
+                            <span class="text">{{ $item->location->name }} </span>
                         </li>
                     </ul>
                 </div>
@@ -39,170 +45,45 @@
                         </div>
                     </div>
                     <span class="card-progress__label fs-12">
-                        5 Investors |
-                        $100,000.00
-                        (100%)
+                        {{ $item->total_share }} Investors |
+                        ${{ $item->per_share_amount }}
+                        ({{ $item->down_payment }}%)
                     </span>
                 </div>
                 <ul class="card-meta card-meta--two">
                     <li class="card-meta__item">
                         <div class="text">
-                            $5,000.00
+                            ${{ $item->profit_amount }}
                         </div>
                         <span class="subtext">Profit</span>
                     </li>
                     <li class="card-meta__item">
                         <div class="text">
-                            <span>Onetime</span>
+                            <span>{{ $item->repeat_time }} </span>
                         </div>
                         <span class="subtext">Profit Schedule</span>
                     </li>
                     <li class="card-meta__item">
                         <div class="text">
-                            Yes
+                             {{ $item->capital_back }}
                         </div>
                         <span class="subtext">Capital Back</span>
                     </li>
                 </ul>
             </div>
             <div class="card-body-bottom">
-                <a class="btn btn--sm btn--base" href="//property/traditional-machiya-townhouse"
-                    role="button">
-                    Details                </a>
+                <a class="btn btn--sm btn--base" href=" "
+                    role="button">  Details  </a>
                 <span class="card-price">
-                    $20,000.00
+                    ${{ $item->per_share_amount }}
                 </span>
             </div>
         </div>
     </div>
-    <div class="card border-0 property-horizontal--card">
-        <a class="card-img card-img--lg" href="//property/modern-loft">
-            <img src="{{ asset('frontend/assets/images/65f97966644131710848358.png') }}"
-                alt="property-image">
-        </a>
-        <div class="card-body py-md-4 px-md-4">
-            <div class="card-body-top mb-4">
-                <div class="card-wrapper flex-column">
-                    <h4 class="card-title mb-1">
-                        <a href="//property/modern-loft">
-                            Modern Loft
-                        </a>
-                    </h4>
-                    <ul class="card-meta card-meta--one">
-                        <li class="card-meta__item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span class="text">New York, USA</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body-middle mb-4">
-                <div class="card-progress mb-4">
-                    <div class="card-progress__bar">
-                        <div class="card-progress__thumb" style="width: 71.3%;">
-                        </div>
-                    </div>
-                    <span class="card-progress__label fs-12">
-                        10 Investors |
-                        $142,600.00
-                        (71.3%)
-                    </span>
-                </div>
-                <ul class="card-meta card-meta--two">
-                    <li class="card-meta__item">
-                        <div class="text">
-                            5 - 8%
-                        </div>
-                        <span class="subtext">Profit</span>
-                    </li>
-                    <li class="card-meta__item">
-                        <div class="text">
-                            <span>Lifetime (Monthly)</span>
-                        </div>
-                        <span class="subtext">Profit Schedule</span>
-                    </li>
-                    <li class="card-meta__item">
-                        <div class="text">
-                            Yes
-                        </div>
-                        <span class="subtext">Capital Back</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body-bottom">
-                <a class="btn btn--sm btn--base" href="//property/modern-loft"
-                    role="button">
-                    Details                </a>
-                <span class="card-price">
-                    $20,000.00
-                </span>
-            </div>
-        </div>
-    </div>
-    <div class="card border-0 property-horizontal--card">
-        <a class="card-img card-img--lg" href="//property/luxury-penthouse">
-            <img src="{{ asset('frontend/assets/images/65f975240d2011710847268.png') }}"
-                alt="property-image">
-        </a>
-        <div class="card-body py-md-4 px-md-4">
-            <div class="card-body-top mb-4">
-                <div class="card-wrapper flex-column">
-                    <h4 class="card-title mb-1">
-                        <a href="//property/luxury-penthouse">
-                            Luxury Penthouse
-                        </a>
-                    </h4>
-                    <ul class="card-meta card-meta--one">
-                        <li class="card-meta__item">
-                            <i class="fas fa-map-marker-alt"></i>
-                            <span class="text">London, England</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card-body-middle mb-4">
-                <div class="card-progress mb-4">
-                    <div class="card-progress__bar">
-                        <div class="card-progress__thumb" style="width: 100%;">
-                        </div>
-                    </div>
-                    <span class="card-progress__label fs-12">
-                        5 Investors |
-                        $50,000.00
-                        (100%)
-                    </span>
-                </div>
-                <ul class="card-meta card-meta--two">
-                    <li class="card-meta__item">
-                        <div class="text">
-                            $1,000.00 - $1,500.00
-                        </div>
-                        <span class="subtext">Profit</span>
-                    </li>
-                    <li class="card-meta__item">
-                        <div class="text">
-                            <span>Onetime</span>
-                        </div>
-                        <span class="subtext">Profit Schedule</span>
-                    </li>
-                    <li class="card-meta__item">
-                        <div class="text">
-                            Yes
-                        </div>
-                        <span class="subtext">Capital Back</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="card-body-bottom">
-                <a class="btn btn--sm btn--base" href="//property/luxury-penthouse"
-                    role="button">
-                    Details                </a>
-                <span class="card-price">
-                    $10,000.00
-                </span>
-            </div>
-        </div>
-    </div>
+ @endforeach 
+    
+
+
         </div>
     </div>
 </section>
