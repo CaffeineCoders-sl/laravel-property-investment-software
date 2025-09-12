@@ -16,7 +16,7 @@ Route::get('/', function () {
 Route::middleware(['auth', IsUser::class])->group(function(){
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('home.dashboard.user_dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard'); 
 
 
