@@ -50,7 +50,13 @@
               
                                     </ul>
     </div>
-        <a href="//user/login" class="btn btn--base">Login</a>
+    @auth
+     <a href="{{ Auth::user()->role === 'admin' ? route('admin.dashboard') : route('dashboard') }} " class="btn btn--base">Dashboard</a>
+    @else 
+ <a href="{{ route('login') }}" class="btn btn--base">Login</a>
+    @endauth
+
+       
                                             </div>
         </nav>
     </div>
