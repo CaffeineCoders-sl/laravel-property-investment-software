@@ -18,6 +18,16 @@ class UserController extends Controller
     }
      // End Method
 
+     public function MyInvestment(){
+        return view('home.dashboard.my_investment');
+     }
+     // End Method
+
+      public function ProfitHistory(){
+        return view('home.dashboard.profit_history');
+     }
+     // End Method
+
 
 
 }

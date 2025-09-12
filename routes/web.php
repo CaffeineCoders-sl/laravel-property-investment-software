@@ -24,7 +24,11 @@ Route::get('/dashboard', function () {
  Route::get('/user/logout', [UserController::class, 'UserLogout'])->name('user.logout');  
 
 
+Route::controller(UserController::class)->group(function(){
+    Route::get('/my/investment', 'MyInvestment')->name('my.investment'); 
+    Route::get('/profit/history', 'ProfitHistory')->name('profit.history');
 
+});
 
 
 
