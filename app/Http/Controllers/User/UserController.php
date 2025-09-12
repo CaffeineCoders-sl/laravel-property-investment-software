@@ -43,6 +43,16 @@ class UserController extends Controller
      }
      // End Method
 
+      public function ProfileSetting(){
+        return view('home.dashboard.profile_setting');
+     }
+     // End Method
+
+      public function UserChangePassword(){
+        return view('home.dashboard.change_password');
+     }
+     // End Method
+
 
 
 }

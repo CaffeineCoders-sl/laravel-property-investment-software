@@ -61,14 +61,14 @@
 
     <li class="sidebar-menu-list__item">
         <a class="sidebar-menu-list__link "
-            href="//realvest/user/profile-setting">
+            href="{{ route('profile.setting') }}">
             <span class="icon"><i class="fas fa-user-circle"></i></span>
             <span class="text">Profile Setting</span>
         </a>
     </li>
     <li class="sidebar-menu-list__item">
         <a class="sidebar-menu-list__link "
-            href="//realvest/user/change-password">
+            href="{{ route('user.change.password') }}">
             <span class="icon"><i class="fas fa-cog"></i></span>
             <span class="text">Change Password</span>
         </a>
