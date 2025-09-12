@@ -28,7 +28,7 @@
         <div class="sidebar-submenu ">
             <ul class="sidebar-submenu-list">
                 <li class="sidebar-submenu-list__item">
-                    <a href="//realvest/user/deposit"
+                    <a href="{{ route('deposit.money') }}"
                         class="sidebar-submenu-list__link ">
                         <span class="text">Deposit Money</span>
                     </a>
@@ -44,7 +44,7 @@
         <div class="sidebar-submenu ">
             <ul class="sidebar-submenu-list">
                 <li class="sidebar-submenu-list__item">
-                    <a href="//realvest/user/withdraw"
+                    <a href="{{ route('withdraw.money') }}"
                         class="sidebar-submenu-list__link ">
                         <span class="text">Withdraw Money</span>
                     </a>
@@ -53,7 +53,7 @@
         </div>
     </li>
     <li class="sidebar-menu-list__item">
-        <a href="//realvest/user/transactions" class="sidebar-menu-list__link ">
+        <a href="{{ route('transactions') }}" class="sidebar-menu-list__link ">
             <span class="icon"><i class="fas fa-exchange-alt"></i></span>
             <span class="text">Transactions</span>
         </a>

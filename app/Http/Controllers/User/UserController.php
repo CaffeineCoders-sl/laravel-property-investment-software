@@ -28,6 +28,21 @@ class UserController extends Controller
      }
      // End Method
 
+      public function DepositMoney(){
+        return view('home.dashboard.deposit_money');
+     }
+     // End Method
+
+      public function WithdrawMoney(){
+        return view('home.dashboard.withdraw_money');
+     }
+     // End Method
+
+      public function Transactions(){
+        return view('home.dashboard.transactions');
+     }
+     // End Method
+
 
 
 }
