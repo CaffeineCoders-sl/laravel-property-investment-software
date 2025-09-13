@@ -9,74 +9,61 @@
         </div>
     </div>
 </section>
-        <section class="property-details py-60 bg-pattern">
+  <section class="property-details py-60 bg-pattern">
         <div class="container ">
             <div class="row gy-4 gy-lg-0 row--one">
                 <div class="col-lg-7 col-xxl-8">
-                    <div class="mb-4">
-                        <h4 class="property-details__title mb-0">Luxury Condominiums</h4>
-                        <ul class="property-details-metan">
-                            <li class="property-details-meta__item">
-                                <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
-                                <span class="text">New York, USA</span>
-                            </li>
-                        </ul>
-                    </div>
+<div class="mb-4">
+    <h4 class="property-details__title mb-0">{{ $property->title }}</h4>
+    <ul class="property-details-metan">
+        <li class="property-details-meta__item">
+            <span class="icon"><i class="fas fa-map-marker-alt"></i></span>
+            <span class="text">{{ $property->location->name }}</span>
+        </li>
+    </ul>
+</div>
                     <div class="property-details__block mb-4">
                         <div class="property-details__slider">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
+   
+    <img class="property-details__slider-img"
+    src="{{ asset($property->image) }}"
     alt="property-image">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
+  
+    @foreach ($property->galleryImages as $img) 
+   <img class="property-details__slider-img"
+    src="{{ asset($img->image) }}"
     alt="property-image">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
-                         <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
+   @endforeach
+                       
                 </div>
+
     <div class="property-details__thumb">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
+
+   <img class="property-details__slider-img"
+    src="{{ asset($property->image) }}"
     alt="property-image">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
+   @foreach ($property->galleryImages as $img) 
+    <img class="property-details__slider-img"
+    src="{{ asset($img->image) }}"
     alt="property-image">
-                        <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
-                       <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
-                         <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
-                         <img class="property-details__slider-img"
-    src="assets/images/65f96cf7510341710845175.png"
-    alt="property-image">
+     @endforeach
+                         
                 </div>
                     </div>
-                    <div class="property-details__block mb-4">
-                        <div class="mb-3">
-                            <h5 class="title">Property Description</h5>
-                            <div class="property-details__desc">
-                                <div><div>Welcome to Luxury Condominiums, a pinnacle of upscale living nestled in the heart of New York City. Boasting unparalleled elegance, supreme comfort, and breathtaking views, this architectural marvel stands as a testament to modern luxury living.</div><div><br></div><div>Strategically located in one of the most coveted neighborhoods of New York City, Luxury Condominiums offers the convenience of urban living with easy access to world-class dining, entertainment, shopping, and cultural experiences. Situated amidst the bustling energy of the city yet providing a serene retreat from its hustle and bustle, residents enjoy the best of both worlds.</div><div><br></div><div>Meticulously crafted by renowned architects and designers, Luxury Condominiums epitomizes contemporary sophistication and timeless charm. The striking facade of the building captivates with its sleek lines and innovative design, setting it apart as an icon of luxury in the city skyline.</div><div><br></div><div>Step into a realm of refined living with our exquisite residences, where every detail has been meticulously curated to exceed the highest standards of luxury. From expansive living spaces bathed in natural light to state-of-the-art appliances and premium finishes, each residence offers a harmonious blend of comfort, style, and functionality. Floor-to-ceiling windows frame panoramic views of the city, creating an ambiance of unparalleled beauty and tranquility.</div><div><br></div><div>Indulge in a lifestyle of luxury and convenience with our comprehensive array of amenities tailored to cater to your every need. Whether you're unwinding at the rooftop infinity pool overlooking the cityscape, staying active at the fully-equipped fitness center, or hosting gatherings in the elegantly appointed communal spaces, Luxury Condominiums provides an unmatched living experience designed to elevate your lifestyle.</div><div><br></div><div>Experience unparalleled service and hospitality with our dedicated team of professionals committed to delivering an exceptional living experience. From 24-hour concierge services to valet parking and personalized assistance, we ensure that every aspect of your residency is seamlessly taken care of, allowing you to focus on what truly matters—enjoying life to the fullest.</div><div><br></div><div>Luxury Condominiums offers more than just a place to live; it provides a sanctuary where luxury meets lifestyle, where every moment is an opportunity to indulge in the finer things in life. Experience the epitome of urban sophistication and make Luxury Condominiums your new address in the heart of New York City.</div></div>                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <h5 class="title">Location</h5>
-                            <iframe class="property-details__map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.25280006535!2d-74.14448744699548!3d40.69763123333062!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24fa5d33f083b%3A0xc80b8f06e177fe62!2sNew%20York%2C%20NY%2C%20USA!5e0!3m2!1sen!2sbd!4v1710997087733!5m2!1sen!2s" style="border:0;"
-                                allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
-                    </div>
+<div class="property-details__block mb-4">
+    <div class="mb-3">
+        <h5 class="title">Property Description</h5>
+        <div class="property-details__desc">
+            {!! $property->details !!}
+     </div>
+    </div>
+    <div class="mb-3">
+        <h5 class="title">Location</h5>
+        <iframe class="property-details__map" src="{{ $property->location_map }}" style="border:0;"
+            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
                     <div class="property-details__block">
     <h5 class="title">Share now</h5>
     <div class="mb-3">
@@ -415,12 +402,7 @@
     </div>
 </div>
 
-
-
-
-
-
-
-
+ 
 
 @endsection
+
