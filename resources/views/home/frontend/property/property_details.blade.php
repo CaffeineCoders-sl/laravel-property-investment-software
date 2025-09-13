@@ -165,34 +165,37 @@
         <span class="value fw-bold">
             ${{ $property->minimum_profit_amount }} %
         </span>
-       @endif 
-        
-
+       @endif  
     </li>
-        <li class="property-details-amount-info__item">
+
+@php
+    $downPaymentAmount = ($property->per_share_amount * $property->down_payment) / 100;
+    $initialAmount = $property->per_share_amount - $downPaymentAmount;
+@endphp
+  <li class="property-details-amount-info__item">
             <span class="label">
-<img src="{{ asset('frontend/assets/images/icons/down_payment.png') }}" alt="img"> Down Payment  </span>  <span class="value fw-bold">20%</span>
+<img src="{{ asset('frontend/assets/images/icons/down_payment.png') }}" alt="img"> Down Payment  </span>  <span class="value fw-bold">{{ $property->down_payment }}% (${{$downPaymentAmount}})</span>
         </li>
         <li class="property-details-amount-info__item">
             <span class="label">
                 <img src="{{ asset('frontend/assets/images/icons/init_amount.png') }}" alt="img">
                 Initial Invest Amount                                        </span>
             <span class="value fw-bold">
-                $5,000.00
+                ${{ $initialAmount }}
             </span>
         </li>
 <li class="property-details-amount-info__item">
     <span class="label">
         <img src="{{ asset('frontend/assets/images/icons/total_installment.png') }}" alt="img">
         Total Installments </span>
-    <span class="value fw-bold">20</span>
+    <span class="value fw-bold">{{ $property->total_installment }}</span>
 </li>
     <li class="property-details-amount-info__item">
         <span class="label">
             <img src="{{ asset('frontend/assets/images/icons/per_installment.png') }}" alt="img">
             Per Installment Amount  </span>
         <span class="value fw-bold">
-            $1,000.00
+            ${{ $property->per_installment_amount }}
         </span>
     </li>
     <li class="property-details-amount-info__item">
@@ -200,7 +203,7 @@
             <img src="{{ asset('frontend/assets/images/icons/installment_schedule.png') }}" alt="img">
             Installment Schedule </span>
         <span class="value fw-bold">
-            Monthly
+           {{ $property->time->time_name }}
         </span>
     </li>
     <li class="property-details-amount-info__item">
@@ -208,7 +211,7 @@
             <img src="{{ asset('frontend/assets/images/icons/late_fee.png') }}" alt="img">
             Installment Late Fee   </span>
         <span class="value fw-bold">
-            $100.00
+            ${{ $property->installment_late_fee }}
         </span>
     </li>
   <li class="property-details-amount-info__item">
@@ -216,7 +219,7 @@
         <img src="{{ asset('frontend/assets/images/icons/profit_schedule.png') }}" alt="img">
         Profit Schedule   </span>
     <span class="value fw-bold">
-        Repeat (Yearly)
+       {{ $property->profit_schedule }}
     </span>
 </li>
 
@@ -225,21 +228,21 @@
             <img src="{{ asset('frontend/assets/images/icons/profit_repeat.png') }}" alt="img">
             Profit Repeat  </span>
         <span class="value fw-bold">
-            3 Times  </span>
+            {{ $property->repeat_time }} Times  </span>
     </li>
   <li class="property-details-amount-info__item">
     <span class="label">
         <img src="{{ asset('frontend/assets/images/icons/capital_back.png') }}" alt="img">
         Capital Back  </span>
     <span class="value fw-bold">
-        No
+        {{ $property->capital_back }}
     </span>
 </li>
 <li class="property-details-amount-info__item">
     <span class="label">
         <img src="{{ asset('frontend/assets/images/icons/profit_back.png') }}" alt="img">
-        Profit Return                                    </span>
-    <span class="value fw-bold">After Investment Completion</span>
+        Profit Return  </span>
+    <span class="value fw-bold">After {{ rtrim(rtrim(number_format($property->profit_back, 10), '0'), '.') }} Days </span>
 </li>
       </ul>
     </div>
