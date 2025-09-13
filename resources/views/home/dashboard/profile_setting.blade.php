@@ -28,8 +28,10 @@
         <div class="col-md-12">
             
             
- <form class="register" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="_token" value="AgrQteztDPUt9ULMougURIKUlrFDk0lPkode5Rzl" autocomplete="off">
+ <form class="register" action="{{ route('user.profile.update') }}" method="post" enctype="multipart/form-data">
+    @csrf
+
+               
                 <div class="row justify-content-center mb-3">
                     <div class="col-12">
                         <div class="d-flex justify-content-center profile__image_content">
@@ -53,7 +55,7 @@
         </div>
 
          <div class="form-group col-sm-4">
-            <label class="form--label"> Main Name</label>
+            <label class="form--label"> User Name</label>
             <input type="text" class="form--control" name="name" value="{{ $profileData->name }}">
         </div>
     </div>
