@@ -459,7 +459,17 @@ class PropertyController extends Controller
 
     public function PropertyDetails($slug){
 
-        return view('home.frontend.property.property_details');
+        $property = Property::with(['galleryImages','location','time'])
+                    ->where('slug',$slug)
+                    ->where('status','1')
+                    ->firstOrFail();
+
+        $latestProperties = Property::where('status','1')
+                    ->orderBy('created_at','desc')
+                    ->take(4)
+                    ->get();
+
+        return view('home.frontend.property.property_details', compact('property','latestProperties'));
 
     }
     //End Method 
