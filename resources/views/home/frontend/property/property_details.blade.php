@@ -251,171 +251,41 @@
             <div class="block-heading">
                 <h6 class="block-heading__title">Latest Properties</h6>
             </div>
-            <div class="property-details__cards">
-                                                        <div class="property-details-card">
-                        <div class="property-details-card__thumb">
-                            <a href="property/opaloasis-estates">
-                                <img src="assets/images/thumb_65f9782e5eeea1710848046.png" alt="Property-image">
-                            </a>
-                        </div>
-                        <div class="property-details-card__content">
-                            <h6 class="title">
-                                <a href="/opaloasis-estates">
-                                    OpalOasis Estates
-                                </a>
-                            </h6>
-                            <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Berlin, Germany</span>
-                            </div>
-                            <span class="price">
-                                $50,000.00
-                            </span>
-                        </div>
-                    </div>
-                                                        <div class="property-details-card">
-                        <div class="property-details-card__thumb">
-                            <a href="property/iconic-victorian">
-                                <img src="assets/images/thumb_65f29e67172461710399079.png" alt="Property-image">
-                            </a>
-                        </div>
-                        <div class="property-details-card__content">
-                            <h6 class="title">
-                                <a href=" /iconic-victorian">
-                                    Iconic Victorian
-                                </a>
-                            </h6>
-                            <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Paris, France</span>
-                            </div>
-                            <span class="price">
-                                $4,000.00
-                            </span>
-                        </div>
-                    </div>
-                                                  
-                                                        <div class="property-details-card">
-                        <div class="property-details-card__thumb">
-                            <a href="/property/stylish-apartment">
-                                <img src="assets/images/thumb_65f97bcae25001710848970.png" alt="Property-image">
-                            </a>
-                        </div>
-                        <div class="property-details-card__content">
-                            <h6 class="title">
-                                <a href="/stylish-apartment">
-                                    Stylish Apartment
-                                </a>
-                            </h6>
-                            <div class="location">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>London, England</span>
-                            </div>
-                            <span class="price">
-                                $20,000.00
-                            </span>
-                        </div>
-                    </div>
-                                                </div>
+<div class="property-details__cards">
+
+   @foreach ($latestProperties as $item) 
+
+     <div class="property-details-card">
+            <div class="property-details-card__thumb">
+                <a href="{{ route('property.details',$item->slug) }}">
+                    <img src="{{ asset($item->image) }}" alt="Property-image">
+                </a>
+            </div>
+            <div class="property-details-card__content">
+                <h6 class="title">
+           <a href="{{ route('property.details',$item->slug) }}">
+                       {{ $item->title }}
+                    </a>
+                </h6>
+                <div class="location">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span> {{ $item->location->name }}</span>
+                </div>
+                <span class="price">
+                    ${{ $item->per_share_amount }}
+                </span>
+            </div>
+        </div>
+        @endforeach
+ 
+        </div>
         </div>
                         </div>
                 </div>
             </div>
         </div>
     </section>
-
-    <div id="investModal" class="modal fade custom--modal invest-modal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0 mb-2">
-                <div>
-                    <h6 class="modal-title">Invest to  - <span class="text--base">Luxury Condominiums</span>
-                    </h6>
-                </div>
-                <button class="close-btn" type="button" data-bs-dismiss="modal">
-                    <i class="las fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form method="POST" action="//realvest/user/invest/store/eyJpdiI6IjZuMGxma002dzJ5RlhZb0xjeTFsWFE9PSIsInZhbHVlIjoiQ3ViZEl4VEdLQW1naWhhdTVscDdlUT09IiwibWFjIjoiMDRiMzliMDZiNDg1NTY4MWE0NTk4MzRjNDhkNTY0MWMyMTRlZmFhMjAyMjk3NTE3OGQyMmIyNzc3MzQzZTM5OSIsInRhZyI6IiJ9"
-                    class="modal-form" id="investForm">
-                    <input type="hidden" name="_token" value="PEASqKgrAKN6rF181e43U0uM8W45aBENiwb3ALoy" autocomplete="off">                    <input type="hidden" name="method" id="paymentMethod" value="gateway">
-                    <div class="modal-form__body">
-                        <div class="mb-4">
-                            <ul class="modal-form__info">
-                                                                    <li class="modal-form__info-item">
-                                        <span class="label">Down Payment</span>
-                                        <span class="value">40%</span>
-                                    </li>
-                                    <li class="modal-form__info-item">
-                                        <span class="label">Initial Invest Amount</span>
-                                        <span class="value">
-                                            $4,800.00
-                                        </span>
-                                    </li>
-                                                                <li class="modal-form__info-item">
-                                    <span class="label">Profit</span>
-                                    <span class="value">
-                                        25 - 40%
-                                    </span>
-                                </li>
-                                <li class="modal-form__info-item">
-                                    <span class="label">Profit Schedule</span>
-                                    <span class="value">
-                                        Repeat (Monthly)
-                                    </span>
-                                </li>
-                                <li class="modal-form__info-item">
-                                    <span class="label">Profit Back</span>
-                                    <span class="value">
-                                        7 days after investment completed                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="form-group">
-                            <div class="d-flex justify-content-between flex-wrap">
-                                <label class="form-label">Invest Amount</label>
-                                                                    <div class="form-check mb-0">
-                                        <input class="form-check-input" name="invest_full_amount" type="checkbox"
-                                            value="true" id="invest_full_amount">
-                                        <label class="form-check-label form-label" for="invest_full_amount">
-                                            Invest Full Amount                                        </label>
-                                    </div>
-                                                            </div>
-                            <div class="input-group--custom style-two">
-                                                                    <input class="form--control" type="number" name="invest_amount"
-                                        value="4800" readonly>
-                                                                <span class="input-group-text">USD</span>
-
-                            </div>
-                            <div class="mt-2 preview-details d-none">
-                                <span>
-                                    <span>Charge:</span>
-                                    <span class="text--base"><span class="charge ">0</span></span>,
-                                </span>
-                                <span>
-                                    <span>Total Amount: </span> <span class="text--base"><span class="payable ">
-                                            0</span></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-form__footer flex-row   flex-wrap form-group">
-                        <button type="button" class="flex-fill btn btn-outline--base active" id="payGatewayButton">
-                            <span class="active-badge"> <i class="las la-check"></i> </span>
-                            Pay via Gateway                        </button>
-                        <button type="button" class="flex-fill btn btn-outline--base" id="payBalanceButton">
-                            <span class="active-badge"> <i class="las la-check"></i> </span>
-                            Pay via Balance                        </button>
-                    </div>
-                    <button type="submit" class="flex-fill btn btn--base w-100">
-                        Invest Now                    </button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
+ 
  
 
 @endsection
