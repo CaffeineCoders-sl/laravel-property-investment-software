@@ -44,7 +44,9 @@ class UserController extends Controller
      // End Method
 
       public function ProfileSetting(){
-        return view('home.dashboard.profile_setting');
+        $id = Auth::user()->id;
+        $profileData = User::find($id);
+        return view('home.dashboard.profile_setting',compact('profileData'));
      }
      // End Method
 
