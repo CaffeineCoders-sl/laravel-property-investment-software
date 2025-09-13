@@ -67,35 +67,39 @@
                     <div class="property-details__block">
     <h5 class="title">Share now</h5>
     <div class="mb-3">
+@php
+    $propertUrl = urlencode(route('property.details',$property->slug));
+    $propertyTitle = urlencode($property->title);
+@endphp
         <ul class="social-list social-list--soft">
             <li class="social-list__item">
-                <a class="social-list__link" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fscript.viserlab.com%2Frealvest%2Fproperty%2Fluxury-condominiums" target="_blank">
+                <a class="social-list__link" href="https://www.facebook.com/sharer/sharer.php?u={{$propertUrl}} " target="_blank">
                     <i class="fab fa-facebook"></i>
                 </a>
             </li>
             <li class="social-list__item">
                 <a class="social-list__link"
-                    href="https://twitter.com/intent/tweet?text=Luxury Condominiums&amp;url=https%3A%2F%2Fscript.viserlab.com%2Frealvest%2Fproperty%2Fluxury-condominiums" target="_blank">
+                    href="https://twitter.com/intent/tweet?text=Luxury Condominiums&amp;url={{$propertUrl}}" target="_blank">
                     <i class="fab fa-twitter"></i>
                 </a>
             </li>
             <li class="social-list__item">
                 <a class="social-list__link"
-                    href="http://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A%2F%2Fscript.viserlab.com%2Frealvest%2Fproperty%2Fluxury-condominiums&amp;title=Luxury Condominiums&amp;summary="
+                    href="http://www.linkedin.com/shareArticle?mini=true&amp;url={{$propertUrl}};title={{$propertyTitle}}"
                     target="_blank">
                     <i class="fab fa-linkedin"></i>
                 </a>
             </li>
             <li class="social-list__item">
-                <a class="social-list__link" href="https://www.instagram.com/sharer.php?u=https%3A%2F%2Fscript.viserlab.com%2Frealvest%2Fproperty%2Fluxury-condominiums" target="_blank">
+                <a class="social-list__link" href="https://www.instagram.com/sharer.php?u={{$propertUrl}}" target="_blank">
                     <i class="fab fa-instagram"></i>
                 </a>
             </li>
         </ul>
     </div>
     <div class="input-group input-group--copy">
-        <input class="form--control" type="text" value="//realvest/property/luxury-condominiums" readonly>
-        <button class="btn btn-soft--base" type="button">
+        <input class="form--control" type="text" value="{{ route('property.details',$property->slug) }}" readonly>
+        <button class="btn btn-soft--base" type="button" onclick="navigator.clipboard.writeText({{ route('property.details',$property->slug) }})">
             <i class="las la-copy"></i>
             <span>Copy</span>
         </button>
@@ -109,18 +113,20 @@
 <div class="col-lg-5 col-xxl-4">
 <div class="property-details__price mb-4">
     <h3 class="mb-0">
-        $25,000.00
+        ${{ $property->per_share_amount }}
     </h3>
-    <span class="text">Per square feet amount</span>
+    <span class="text">Per Share Amount</span>
 </div>
+
 <div class="property-details__buttons mb-md-4 mb-0">
-                                <a href="login" type="button" class="btn btn--lg btn--base">
+   <a href="login" type="button" class="btn btn--lg btn--base">
             Invest Now                            </a>
-                            <button type="button" class="btn btn--lg btn-outline--base d-lg-none" data-toggle="sidebar" data-target="#property-details-sidebar">
+  <button type="button" class="btn btn--lg btn-outline--base d-lg-none" data-toggle="sidebar" data-target="#property-details-sidebar">
         <i class="fas fa-info-circle"></i>
         <span>Details</span>
     </button>
 </div>
+
 <div id="property-details-sidebar" class="property-details-sidebar">
     <button type="button" class="close-btn">
         <i class="fas fa-times"></i>
@@ -128,8 +134,7 @@
     <div class="property-details-sidebar__block mb-4">
         <div class="block-heading">
             <p class="block-heading__subtitle">Available:
-                0
-                Square Feet                                </p>
+                0 Share                               </p>
         </div>
         <div class="card-progress mt-2">
             <div class="card-progress__bar">
@@ -137,7 +142,7 @@
                 </div>
             </div>
             <span class="card-progress__label fs-12">
-                2 Square Feet |
+                2 Investors |
                 $45,000.00
                 (100%)
             </span>
@@ -145,17 +150,23 @@
 <ul class="property-details-amount-info">
     <li class="property-details-amount-info__item">
         <span class="label">
-            <img src="{{ asset('frontend/assets/images/icons/invest_type.png') }}" alt="img">
-            Investment Type   </span>
-        <span class="value fw-bold"> Installment  </span>
+            <img src="{{ asset('frontend/assets/images/icons/invest_type.png') }}" alt="img"> Investment Type </span>
+        <span class="value fw-bold"> {{ $property->investment_type }}  </span>
     </li>
     <li class="property-details-amount-info__item">
         <span class="label">
             <img src="{{ asset('frontend/assets/images/icons/profit.png') }}" alt="img">
             Profit  </span>
-        <span class="value fw-bold">
-            $5,000.00
+       @if ($property->profit_type === 'fixed')
+         <span class="value fw-bold">
+            ${{ $property->profit_amount }} Fixed
         </span>
+        @else 
+        <span class="value fw-bold">
+            ${{ $property->minimum_profit_amount }} %
+        </span>
+       @endif 
+        
 
     </li>
         <li class="property-details-amount-info__item">
