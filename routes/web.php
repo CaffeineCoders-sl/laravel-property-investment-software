@@ -35,6 +35,7 @@ Route::controller(UserController::class)->group(function(){
 
 
     Route::post('/user/profile/update', 'UserProfileUpdate')->name('user.profile.update');
+    Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
 
 });
 

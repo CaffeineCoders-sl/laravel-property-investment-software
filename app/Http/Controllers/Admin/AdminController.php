@@ -22,7 +22,7 @@ class AdminController extends Controller
         $request->session()->regenerateToken(); 
         return redirect('/login');
     }
-     // End Method 
+     // End Method
 
     public function AdminProfile(){
 

@@ -5,7 +5,7 @@
     <h2>Admin Change Password</h2> 
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs">
-            <li>
+            <li> 
                 <a href="index.html">
                     <i class="bx bx-home-alt"></i>
                 </a>
