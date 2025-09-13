@@ -429,7 +429,7 @@ class PropertyController extends Controller
 
    }
     //End Method 
-
+ 
     public function DeleteProperty($id){
         $property = Property::findOrFail($id);
 
@@ -454,6 +454,13 @@ class PropertyController extends Controller
             'alert-type' => 'success'
         ); 
         return redirect()->back()->with($notification); 
+    }
+    //End Method 
+
+    public function PropertyDetails($slug){
+
+        return view('home.frontend.property.property_details');
+
     }
     //End Method 
 

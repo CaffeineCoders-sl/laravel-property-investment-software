@@ -105,7 +105,8 @@ Route::controller(PropertyController::class)->group(function(){
 
 
 
-
+/// This Routes for access all 
+ Route::get('/details/{slug}', [PropertyController::class, 'PropertyDetails'])->name('property.details');
 
 
 
