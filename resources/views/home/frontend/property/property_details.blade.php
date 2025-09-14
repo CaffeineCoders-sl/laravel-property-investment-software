@@ -119,12 +119,30 @@
 </div>
 
 <div class="property-details__buttons mb-md-4 mb-0">
-   <a href="login" type="button" class="btn btn--lg btn--base">
-            Invest Now                            </a>
-  <button type="button" class="btn btn--lg btn-outline--base d-lg-none" data-toggle="sidebar" data-target="#property-details-sidebar">
-        <i class="fas fa-info-circle"></i>
-        <span>Details</span>
-    </button>
+  @php
+       $totalShare = $property->total_share ?? 0; 
+       $soldShare = $property->investments->sum('share_count');
+       $availableShare = max(0,$totalShare - $soldShare);
+       $isSoldOut = $availableShare  <= 0; 
+   @endphp
+
+   @if ($isSoldOut)
+       <button type="button" class="btn btn--lg btn--base disabled"
+        style="pointer-events: auto; cursor: not-allowed;" title="It's not avaiable">  Invest Now   
+      </button>
+
+   @else 
+      @guest
+      <a href="{{ route('login') }}" type="button" class="btn btn--lg btn--base">
+            Invest Now </a>
+      @else  
+
+      <a href="{{ route('login') }}" type="button" class="btn btn--lg btn--base">
+            Invest Now </a> 
+      @endguest
+
+   @endif 
+   
 </div>
 
 <div id="property-details-sidebar" class="property-details-sidebar">
