@@ -33,14 +33,72 @@
 
  <div class="mb-4">
     <h3 class="h5 fw-semibold text-dark mb-3">Payment Methods </h3>
+    <div class="row g-3">
+        
+        <div class="col-md-4">
+            <label class="payment-method w-100 p-3 border rounded position-relative">
+        <input type="radio" name="payment_method" value="stripe" checked class="position-absolute top-0 end-0 m-2" style="z-index: 1;" >
+        <div class="d-flex align-items-center">
+            <div class="bg-light rounded d-flex align-items-center justify-content-center me-2" style="width: 40x; height:40;">
+                <i class="fab fa-stripe text-primary fs-5"></i>
+            </div>
+        <span class="fw-semibold">Credit Card</span>
+        </div>
+        <div class="mt-2 text-muted small">
+            Pay instantly with Visa Mastercard
+        </div>
+            </label> 
+        </div>
 
+
+        <div class="col-md-4">
+            <label class="payment-method w-100 p-3 border rounded position-relative">
+        <input type="radio" name="payment_method" value="cash" class="position-absolute top-0 end-0 m-2" style="z-index: 1;" >
+        <div class="d-flex align-items-center">
+            <div class="bg-light rounded d-flex align-items-center justify-content-center me-2" style="width: 40x; height:40;">
+                <i class="fas fa-money-bill-wave text-success fs-5"></i>
+            </div>
+        <span class="fw-semibold">Cash Payment</span>
+        </div>
+        <div class="mt-2 text-muted small">
+            Pay in person at our office
+        </div>
+            </label> 
+        </div>
+
+
+         <div class="col-md-4">
+            <label class="payment-method w-100 p-3 border rounded position-relative">
+        <input type="radio" name="payment_method" value="bank_transfer" class="position-absolute top-0 end-0 m-2" style="z-index: 1;" >
+        <div class="d-flex align-items-center">
+            <div class="bg-light rounded d-flex align-items-center justify-content-center me-2" style="width: 40x; height:40;">
+                <i class="fas fa-university text-info fs-5"></i>
+            </div>
+        <span class="fw-semibold">Bank Transfer</span>
+        </div>
+        <div class="mt-2 text-muted small">
+            Transfer to our bank and Confirm 
+        </div>
+            </label> 
+        </div>
+ 
+
+    </div> 
  </div>
 
+  <div class="form-check mb-2" style="margin-top: 40px;">
+    <input class="form-check-input" type="checkbox" name="agreed_to_terms" id="terms" value="1" required>
+    <label class="form-check-label text-dark" for="terms">
+        I agree to the 
+        <a href="#" class="text-primary text-decoration-none">Terms of Service</a>, 
+        <a href="#" class="text-primary text-decoration-none">Privacy Policy</a>, and confirm that I have read the 
+        <a href="#" class="text-primary text-decoration-none">Investment Prospectus</a>.
+    </label>
+</div>
 
-
-
-
-
+<button type="submit" class="w-100 btn btn-primary btn-lg py-3 fw-bold btn-hover-scale">
+    Complete Investment
+</button> 
 
     </form>
 
@@ -50,12 +108,6 @@
 
 </div>
 
-
-
-
-
-
-
-
+ 
 
 @endsection
