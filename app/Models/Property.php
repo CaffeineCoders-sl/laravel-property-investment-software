@@ -20,4 +20,8 @@ class Property extends Model
         return $this->belongsTo(Time::class, 'time_id');
     }
 
+     public function investments(){
+        return $this->hasMany(Investment::class);
+    }
+
 }
