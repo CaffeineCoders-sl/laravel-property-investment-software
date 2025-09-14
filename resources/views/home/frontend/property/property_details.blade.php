@@ -137,7 +137,7 @@
             Invest Now </a>
       @else  
 
-      <a href="{{ route('login') }}" type="button" class="btn btn--lg btn--base">
+      <a href="{{ route('user.invest.page',$property->slug) }}" type="button" class="btn btn--lg btn--base">
             Invest Now </a> 
       @endguest
 

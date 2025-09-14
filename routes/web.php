@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Http\Controllers\Admin\PropertyController;
+use App\Http\Controllers\Admin\InvestmentController;
 use App\Http\Controllers\User\UserController;
 
 Route::get('/', function () {
@@ -36,6 +37,13 @@ Route::controller(UserController::class)->group(function(){
 
     Route::post('/user/profile/update', 'UserProfileUpdate')->name('user.profile.update');
     Route::post('/user/password/update', 'UserPasswordUpdate')->name('user.password.update');
+
+});
+
+
+Route::controller(InvestmentController::class)->group(function(){
+    Route::get('/investment/page/{slug}', 'UserInvestProperty')->name('user.invest.page'); 
+   
 
 });
 
