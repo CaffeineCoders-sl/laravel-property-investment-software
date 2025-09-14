@@ -15,6 +15,10 @@ class Investment extends Model
     public function property(){
         return $this->belongsTo(Property::class);
     }
+
+     public function installments(){
+        return $this->hasMany(Installment::class);
+    }
     
 
 
