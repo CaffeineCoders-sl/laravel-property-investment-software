@@ -43,7 +43,7 @@
  <input type="hidden" name="down_payment"  value="{{ $property->down_payment }}">
  <input type="hidden" name="total_share"  value="{{ $property->total_share }}">
 
- <input type="hidden" name="payment_type"  value="{{ strtolower($property->investment_type) == 'Investment-By-Installment' ? 'installment' : 'full' }}">
+ <input type="hidden" name="payment_type"  value="{{ strtolower($property->investment_type) == 'investment-by-installment' ? 'installment' : 'full' }}">
 
 
  <div class="row g-4 mb-4">

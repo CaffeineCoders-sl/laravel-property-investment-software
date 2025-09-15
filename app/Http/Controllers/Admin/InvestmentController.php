@@ -71,7 +71,7 @@ class InvestmentController extends Controller
 
         // Wrap DB action for invenstment Table 
         DB::transaction(function () use (
-            $request, $perShareAmount, $totalAmount ,$downPayment ,$installmentAmount, $time,$paymentStatus,$transactionId,
+            $request,$property, $perShareAmount, $totalAmount ,$downPayment ,$installmentAmount, $time,$paymentStatus,$transactionId,
         ){
             $investment = Investment::create([
                 'user_id' => auth()->id(),
