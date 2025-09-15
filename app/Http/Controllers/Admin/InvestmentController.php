@@ -91,6 +91,29 @@ class InvestmentController extends Controller
 
         /// Store data in our Installment Table 
 
+        if ($request->payment_type === 'installment') {
+            Installment::create([
+                'investment_id' => $investment->id,
+                'amount' => $downPayment,
+                'next_time' => now(),
+                'paid_time' => now(),
+                'status' => 'paid'
+            ]);
+
+            for ($i=1; $i <= $request->total_installment ; $i++) { 
+                Installment::create([
+                    'investment_id' => $investment->id,
+                    'amount' => $installmentAmount,
+                    'next_time' => now()->addMonths($i * $time->interval_months),
+                    'status' => 'due'
+                ]);
+            }
+
+        }
+
+        /// add data in Profit table 
+
+
 
 
         });
