@@ -6,7 +6,45 @@
         <div class="container">
             <h3>{{ $property->title }}</h3>
    
-   <form action="">
+   <form action="" method="POST">
+    @csrf
+   
+    <!--- Property Identification   --->
+    <input type="hidden" name="property_id"  value="{{ $property->id }}">
+    <input type="hidden" name="slug"  value="{{ $property->slug }}">
+
+      <!--- Finacial Details   --->
+ <input type="hidden" name="per_share_amount"  value="{{ $property->per_share_amount }}">
+ <input type="hidden" name="per_installment_amount"  value="{{ $property->per_installment_amount }}">
+ <input type="hidden" name="installment_late_fee"  value="{{ $property->installment_late_fee }}">
+
+    <!--- Investment Structure Details   --->
+ <input type="hidden" name="total_installment"  value="{{ $property->total_installment }}">
+ <input type="hidden" name="investment_type"  value="{{ $property->investment_type }}">
+ <input type="hidden" name="time_id"  value="{{ $property->time->id }}">
+
+  <!--- Profit Details   --->
+ <input type="hidden" name="profit_type"  value="{{ $property->profit_type }}">
+ 
+ @if ($property->profit_type === 'fixed')
+   <input type="hidden" name="profit_amount"  value="{{ $property->profit_amount }}">
+   @else
+    <input type="hidden" name="minimum_profit_amount"  value="{{ $property->minimum_profit_amount }}"> 
+ @endif
+
+  <input type="hidden" name="profit_schedule"  value="{{ $property->profit_schedule }}">
+   <input type="hidden" name="repeat_time"  value="{{ $property->repeat_time }}">
+
+    <!--- Capital Return   --->
+ <input type="hidden" name="capital_back"  value="{{ $property->capital_back }}">
+ <input type="hidden" name="profit_back"  value="{{ $property->profit_back }}">
+
+  <!--- Additional Fields   --->
+ <input type="hidden" name="down_payment"  value="{{ $property->down_payment }}">
+ <input type="hidden" name="total_share"  value="{{ $property->total_share }}">
+
+ <input type="hidden" name="payment_type"  value="{{ strtolower($property->investment_type) == 'Investment-By-Installment' ? 'installment' : 'full' }}">
+
 
  <div class="row g-4 mb-4">
    <div class="col-md-6">
