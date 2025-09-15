@@ -113,13 +113,35 @@ class InvestmentController extends Controller
 
         /// add data in Profit table 
 
+        $profitAmount = 0;
+        if ($request->profit_type === 'fixed') {
+           $profitAmount = $property->profit_amount ?? 0;
+        } else {
+            $profitAmount = $property->minimum_profit_amount ?? 0;
+        }
 
+        $profitAmount *= $request->share_count;
 
+        if ($profitAmount > 0 && $request->profit_schedule === 'Repeated-Time' && $request->repeat_time > 0 ) {
+            for ($i=1; $i <= $request->repeat_time ; $i++) { 
+                Profit::create([
+                    'investment_id' => $investment->id,
+                    'user_id' => auth()->id(),
+                    'property_id' => $property->id,
+                    'profit_amount' => $profitAmount,
+                    'paid_date' => now()->addMonths($i),
+                    'status' => 'pending',
+                ]);
+            }
+        } 
+      }); 
 
-        });
+       $notification = array(
+            'message' => 'Investment Submitted Successfully',
+            'alert-type' => 'success'
+        );
 
-
-
+        return redirect()->route('my.investment')->with($notification);
 
     }
      /// End Method 
