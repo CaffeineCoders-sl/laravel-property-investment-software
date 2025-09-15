@@ -66,6 +66,35 @@ class InvestmentController extends Controller
            $time = Time::findOrFail($request->time_id);
         }
 
+        $paymentStatus = ($request->payment_type === 'full') ? 'paid' :'pending';
+        $transactionId = null;
+
+        // Wrap DB action for invenstment Table 
+        DB::transaction(function () use (
+            $request, $perShareAmount, $totalAmount ,$downPayment ,$installmentAmount, $time,$paymentStatus,$transactionId,
+        ){
+            $investment = Investment::create([
+                'user_id' => auth()->id(),
+                'property_id' => $property->id,
+                'share_count' => $request->share_count,
+                'per_share_price' => $perShareAmount,
+                'total_amount' => $totalAmount,
+                'payment_method' => $request->payment_method,
+                'payment_type' => $request->payment_type,
+                'payment_status' => $paymentStatus,
+                'transaction_id' => $transactionId,
+                'status' => 'active',
+                'approved_by_admin' => ($request->payment_method === 'cash'),
+                'investment_date' => now(),
+                'time_id' => $request->time_id, 
+            ]);
+
+        /// Store data in our Installment Table 
+
+
+
+        });
+
 
 
 
