@@ -43,6 +43,7 @@ Route::controller(UserController::class)->group(function(){
 
 Route::controller(InvestmentController::class)->group(function(){
     Route::get('/investment/page/{slug}', 'UserInvestProperty')->name('user.invest.page'); 
+    Route::post('/investment/store', 'InvestmentStore')->name('investment.store');
    
 
 });

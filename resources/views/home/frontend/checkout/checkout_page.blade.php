@@ -6,7 +6,7 @@
         <div class="container">
             <h3>{{ $property->title }}</h3>
    
-   <form action="" method="POST">
+   <form action="{{ route('investment.store') }}" method="POST">
     @csrf
    
     <!--- Property Identification   --->
