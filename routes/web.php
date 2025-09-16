@@ -46,6 +46,7 @@ Route::controller(InvestmentController::class)->group(function(){
     Route::post('/investment/store', 'InvestmentStore')->name('investment.store');
 
     Route::get('/my/investment', 'MyInvestment')->name('my.investment'); 
+    Route::get('/view/installment/{id}', 'ViewInstallment')->name('view.installment');
    
 
 });

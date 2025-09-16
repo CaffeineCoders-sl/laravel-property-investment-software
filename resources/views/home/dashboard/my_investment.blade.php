@@ -76,7 +76,7 @@
         @endif 
        </td>
     <td>
-         <a href="" class="on-default edit-row me-2"><strong>Details</strong></a>   
+         <a href="{{ route('view.installment',$investment->id) }}" class="on-default edit-row me-2"><strong>Details</strong></a>   
         
     </td>
 </tr>

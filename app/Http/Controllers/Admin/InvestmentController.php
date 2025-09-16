@@ -167,7 +167,12 @@ class InvestmentController extends Controller
      }
      // End Method
 
+     public function ViewInstallment($id){
+        $investment = Investment::with('property','installments')->findOrFail($id);
+        return view('home.dashboard.all_installment',compact('investment'));
 
+     }
+     // End Method
 
 
 
