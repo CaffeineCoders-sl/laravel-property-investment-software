@@ -47,6 +47,8 @@ Route::controller(InvestmentController::class)->group(function(){
 
     Route::get('/my/investment', 'MyInvestment')->name('my.investment'); 
     Route::get('/view/installment/{id}', 'ViewInstallment')->name('view.installment');
+
+    Route::get('/installment/pay/{id}', 'InstallmentPay')->name('installment.pay');
    
 
 });

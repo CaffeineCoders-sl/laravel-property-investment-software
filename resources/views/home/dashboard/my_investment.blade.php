@@ -49,7 +49,7 @@
                             </tr>
                         </thead>
                         <tbody>
-@foreach ($investments as $investment) 
+@forelse ($investments as $investment) 
     <tr>
     <td>
         <a href="#">
@@ -80,7 +80,13 @@
         
     </td>
 </tr>
-@endforeach
+
+@empty
+<tr>
+    <td colspan="5" class="text-center text-muted">No Investments found</td>
+</tr> 
+
+@endforelse
             </tbody>
                     </table>
                 </div>

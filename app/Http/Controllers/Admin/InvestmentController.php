@@ -174,6 +174,11 @@ class InvestmentController extends Controller
      }
      // End Method
 
+     public function InstallmentPay($id){
+
+     }
+       // End Method
+
 
 
 }

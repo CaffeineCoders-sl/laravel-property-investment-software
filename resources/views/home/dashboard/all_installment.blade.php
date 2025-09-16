@@ -53,7 +53,7 @@
         $downPaymentAmount = $investment->property->down_payment *  $investment->share_count;
         $startDate = \Carbon\Carbon::parse($investment->created_at);
     @endphp
-  @foreach ($investment->installments as $installment) 
+  @forelse ($investment->installments as $installment) 
     <tr>
     <td>
         @php
@@ -126,10 +126,22 @@
         @endif 
       </td>
     <td>
-    <a href="" class="action--btn btn btn-outline--primary" title="Pay Installment"><i class="las la-coins"></i></a>     
+    @if ($installment->status == 'due')
+     <a href="{{ route('installment.pay',$installment->id) }}" class="action--btn btn btn-outline--primary" title="Pay Installment"><i class="las la-coins"></i></a>  
+
+    @else 
+        <span class="text-muted">--</span>
+    @endif
+      
     </td> 
     </tr>
-@endforeach
+
+    @empty
+    <tr>
+        <td colspan="6" class="text-center">No Installments found.</td>
+    </tr> 
+
+@endforelse
 
                                                                                                                                          
           </tbody>
