@@ -70,11 +70,38 @@
         </div>
     </td>
     <td>
-        <div>N/a </div>
+        @if ($loop->first && $downPaymentAmount > 0)
+          Down Payment 
+        @else   
+    @php
+     // Orginal Suffix
+     $suffix = 'th';
+     if ( $installmentNumber % 10 == 1 &&  $installmentNumber % 100 !== 11) {
+      $suffix = 'st';
+     } elseif ($installmentNumber % 10 == 2 &&  $installmentNumber % 100 !== 12) {
+        $suffix = 'nd';
+     }elseif ($installmentNumber % 10 == 3 &&  $installmentNumber % 100 !== 13) {
+        $suffix = 'rd';
+     }
+   @endphp
+   {{ $installmentNumber }} {{  $suffix }} Installment <br>
+   <span class="small">{{ $installmentDate->format('F') }}</span>
+      @endif 
     </td>
     <td>
-        <div>N/a </div>
+        @php
+            $discountAmount = $investment->total_amount * ($investment->property->down_payment / 100);
+        @endphp
+    @if ($loop->first && $investment->property->down_payment > 0)
+    {{ (int) $investment->property->down_payment }} %
+    ( ${{ $investment->total_amount * ($investment->property->down_payment / 100)}} )
+    @else
+    ${{ $totalInstallmentAmount }}
+        
+    @endif
+        
     </td>
+
     <td>
         <div>N/a </div>
     </td>
