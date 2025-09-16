@@ -100,13 +100,31 @@
         
     @endif
         
-    </td>
-
+    </td> 
     <td>
-        <div>N/a </div>
+    @php
+        if ($downPaymentAmount > 0) {
+           $installmentNumber = $loop->index;
+        } else {
+            $installmentNumber = $loop->index + 1;
+        }
+        $installmentDate = $startDate->copy()->addMonths($installmentNumber);
+    @endphp 
+
+        <div>{{ $installmentDate->format('Y-m-d') }} <br>
+       <span class="small">{{ $installmentDate->format('F') }}</span>
+         </div>
     </td>
-    <td>$0.00</td>
-    <td><span class="badge badge--warning">Due</span>   </td>
+    <td>${{ $investment->property->installment_late_fee }} </td>
+    <td>
+        @if ($installment->status == 'paid')
+         <span class="badge badge--success">Paid</span> 
+         @elseif ($installment->status == 'due')
+             <span class="badge badge--primary">Due</span> 
+         @else 
+          <span class="badge badge--danger">Failed</span> 
+        @endif 
+      </td>
     <td>
     <a href="" class="action--btn btn btn-outline--primary" title="Pay Installment"><i class="las la-coins"></i></a>     
     </td> 
