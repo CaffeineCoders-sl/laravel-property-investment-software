@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(UserController::class)->group(function(){
-    Route::get('/my/investment', 'MyInvestment')->name('my.investment'); 
+   
     Route::get('/profit/history', 'ProfitHistory')->name('profit.history');
     Route::get('/deposit/money', 'DepositMoney')->name('deposit.money');
     Route::get('/withdraw/money', 'WithdrawMoney')->name('withdraw.money');
@@ -44,6 +44,8 @@ Route::controller(UserController::class)->group(function(){
 Route::controller(InvestmentController::class)->group(function(){
     Route::get('/investment/page/{slug}', 'UserInvestProperty')->name('user.invest.page'); 
     Route::post('/investment/store', 'InvestmentStore')->name('investment.store');
+
+    Route::get('/my/investment', 'MyInvestment')->name('my.investment'); 
    
 
 });
