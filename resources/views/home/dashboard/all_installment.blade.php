@@ -40,19 +40,40 @@
     <thead>
         <tr>
             <th>Installment Date</th>
+            <th>Installment Type</th>
+            <th>Payment</th>
             <th>Paid Date</th>
             <th>Late Fee</th>
             <th>Status</th>
             <th>Action</th>
         </tr>
     </thead>
-<tbody>                                                           
+<tbody>
+    @php
+        $downPaymentAmount = $investment->property->down_payment *  $investment->share_count;
+        $startDate = \Carbon\Carbon::parse($investment->created_at);
+    @endphp
+  @foreach ($investment->installments as $installment) 
     <tr>
     <td>
+        @php
+            if ($downPaymentAmount  > 0) {
+                $installmentNumber = $loop->index;
+            }else {
+                $installmentNumber = $loop->index + 1; 
+            }
+            $installmentDate = $startDate->copy()->addMonths($installmentNumber);
+        @endphp
         <div>
-            2025-06-25<br>
-            <span class="small">3 weeks from now</span>
+           {{ $installmentDate->format('Y-m-d') }}<br>
+            <span class="small">{{ $installmentDate->diffForHumans() }}</span>
         </div>
+    </td>
+    <td>
+        <div>N/a </div>
+    </td>
+    <td>
+        <div>N/a </div>
     </td>
     <td>
         <div>N/a </div>
@@ -61,9 +82,10 @@
     <td><span class="badge badge--warning">Due</span>   </td>
     <td>
     <a href="" class="action--btn btn btn-outline--primary" title="Pay Installment"><i class="las la-coins"></i></a>     
-    </td>
-
+    </td> 
     </tr>
+@endforeach
+
                                                                                                                                          
           </tbody>
                     </table>
