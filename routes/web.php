@@ -7,6 +7,7 @@ use App\Http\Middleware\IsAdmin;
 use App\Http\Middleware\IsUser;
 use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\InvestmentController;
+use App\Http\Controllers\Admin\DipositController;
 use App\Http\Controllers\User\UserController;
 
 Route::get('/', function () {
@@ -109,6 +110,10 @@ Route::controller(PropertyController::class)->group(function(){
     Route::delete('/property/galleryimage-delete/{id}', 'GalleryImgDelete');
 });
 
+Route::controller(DipositController::class)->group(function(){
+    Route::get('/pending/deposit', 'PendingDeposit')->name('pending.deposit'); 
+   
+});
 
 
 
