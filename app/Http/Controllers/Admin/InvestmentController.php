@@ -202,7 +202,7 @@ class InvestmentController extends Controller
             $suffix = 'th';
         }
 
-        $installmentType = $effectiveIndex . $suffix . 'Installment'; 
+        $installmentType = $effectiveIndex . $suffix . ' Installment'; 
     } 
     return view('home.dashboard.deposit_money',compact('installment','installmentType'));
 
