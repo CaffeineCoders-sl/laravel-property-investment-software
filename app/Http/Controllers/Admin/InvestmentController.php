@@ -176,6 +176,36 @@ class InvestmentController extends Controller
 
      public function InstallmentPay($id){
 
+        $installment = Installment::with(['investment.property','investment.installments'])->findOrFail($id);
+        $investment = $installment->investment;
+        $property = $investment->property;
+
+        $hasDownPayment = $property->down_payment > 0;
+
+        // get installment position in collection
+        $installmentIndex = $investment->installments->search(function($item) use ($installment){
+            return $item->id === $installment->id;
+        });
+
+        $effectiveIndex = $hasDownPayment ? $installmentIndex : $installmentIndex + 1;
+
+    if ($installmentIndex === 0 && $hasDownPayment) {
+        $installmentType = 'Down Payment';
+    } else {
+        if ($effectiveIndex % 10 == 1 && $effectiveIndex % 100 != 11) {
+            $suffix = 'st';
+        } elseif ($effectiveIndex % 10 == 2 && $effectiveIndex % 100 != 12) {
+            $suffix = 'nd';
+        }elseif ($effectiveIndex % 10 == 3 && $effectiveIndex % 100 != 13) {
+            $suffix = 'rd';
+        } else {
+            $suffix = 'th';
+        }
+
+        $installmentType = $effectiveIndex . $suffix . 'Installment'; 
+    } 
+    return view('home.dashboard.deposit_money',compact('installment','installmentType'));
+
      }
        // End Method
 
