@@ -28,8 +28,11 @@
           
           
           
-   <form action=" " method="post" class="deposit-form">
- 
+   <form action="{{ route('pay.installment.store') }}" method="post" class="deposit-form">
+    @csrf
+
+    <input type="hidden" name="installment_id" value="{{ $installment->id }}">
+    <input type="hidden" name="property_id" value="{{ $installment->investment->property->id }}">
    
     <div class="gateway-card">
         <div class="row justify-content-center gy-sm-4 gy-3">
@@ -113,6 +116,7 @@
                     <p class="text"><span class="processing-fee">0.00</span>
                         USD
                     </p>
+            <input type="hidden" name="charge" value="0">     
                 </div>
             </div>
 
@@ -122,6 +126,7 @@
                 </div>
                 <div class="deposit-info__input">
           <p class="text"><span class="final-amount">{{ $installment->amount }}</span>  USD</p>
+          <input type="hidden" name="total_amount" value="{{ $installment->amount }}">
                 </div>
             </div>
   

@@ -13,6 +13,7 @@ use App\Models\Profit;
 use App\Models\Diposit;
 use App\Models\Time;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class InvestmentController extends Controller
 {
@@ -208,6 +209,43 @@ class InvestmentController extends Controller
 
      }
        // End Method
+
+    public function PayInstallmentStore(Request $request){
+
+        $request->validate([
+            'property_id' => 'required|exists:properties,id',
+            'installment_id' => 'required|exists:installments,id',
+            'payment_type' => 'required',
+            'amount' => 'required'
+        ]);
+
+        /// Save this to Diposit
+        $diposit = Diposit::create([
+            'user_id' => auth()->id(),
+            'property_id' => $request->property_id,
+            'installment_id' => $request->installment_id,
+            'amount' => $request->amount,
+            'charge' => $request->charge,
+            'total_amount' => $request->total_amount,
+            'payment_type' => $request->payment_type,
+            'trx' => strtoupper(Str::random(12)),
+            'status' => 'pending',
+        ]);
+
+        Installment::where('id',$request->installment_id)->update([
+            'status' => 'processing',
+            'paid_time' => now(),
+        ]);
+
+        $notification = array(
+            'message' => 'Installment Payment Submited Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('my.investment')->with($notification);
+
+    }
+     // End Method
 
 
 

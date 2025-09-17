@@ -121,6 +121,8 @@
          <span class="badge badge--success">Paid</span> 
          @elseif ($installment->status == 'due')
              <span class="badge badge--primary">Due</span> 
+         @elseif ($installment->status == 'processing')
+             <span class="badge badge--warning">Processing</span>
          @else 
           <span class="badge badge--danger">Failed</span> 
         @endif 
