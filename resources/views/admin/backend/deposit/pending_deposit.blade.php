@@ -82,7 +82,7 @@
         $installmentType = $effectiveIndex . $suffix . ' Installment'; 
     }         
     @endphp
-    
+
     {{ $installmentType }}
     @else 
     <span class="text-muted">N\A</span> 
@@ -99,7 +99,7 @@
                 @endif 
             </td>
             <td>
-         <a href="{{ route('edit.property',$item->id) }}" class="btn btn-outline-primary btn-sm">Details</a>  
+         <a href="{{ route('deposit.details',$item->id) }}" class="btn btn-outline-primary btn-sm">Details</a>  
             
              </td>  
         </tr>

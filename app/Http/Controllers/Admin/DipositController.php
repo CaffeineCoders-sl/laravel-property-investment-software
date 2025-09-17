@@ -26,5 +26,20 @@ class DipositController extends Controller
     }
     // End Method 
 
+    public function DepositDetails($id){
+        $details = Diposit::with(['user','property','installment.investment.property'])->findOrFail($id);
+
+        $investmentId = optional($details->installment)->investment_id;
+
+        if (!$investmentId) {
+           return back()->with('error','NO investment linked with this deposit');
+        }
+
+        $investment = Investment::with(['user','property','installments'])->findOrFail($investmentId);
+
+        return view('admin.backend.deposit.details_deposit',compact('details','investment'));
+    }
+    // End Method 
+
 
 }

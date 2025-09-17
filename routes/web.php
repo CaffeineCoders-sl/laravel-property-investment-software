@@ -111,7 +111,8 @@ Route::controller(PropertyController::class)->group(function(){
 });
 
 Route::controller(DipositController::class)->group(function(){
-    Route::get('/pending/deposit', 'PendingDeposit')->name('pending.deposit'); 
+    Route::get('/pending/deposit', 'PendingDeposit')->name('pending.deposit');
+    Route::get('/deposit/details/{id}', 'DepositDetails')->name('deposit.details'); 
    
 });
 
