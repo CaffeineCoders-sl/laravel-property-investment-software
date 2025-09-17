@@ -52,6 +52,41 @@
             <td>${{ $item->amount }} <br> <strong>${{ $item->total_amount }} </strong> </td>
 
             <td> 
+    @if ($item->installment)
+    @php
+        $investment = $item->installment->investment;
+        $property = $investment->property;
+
+        $hasDownPayment = $property->down_payment > 0;
+
+        // get installment position in collection
+        $installmentIndex = $investment->installments->search(function($deposit) use ($item){
+            return $deposit->id === $item->installment->id;
+        });
+
+        $effectiveIndex = $hasDownPayment ? $installmentIndex : $installmentIndex + 1;
+
+    if ($installmentIndex === 0 && $hasDownPayment) {
+        $installmentType = 'Down Payment';
+    } else {
+        if ($effectiveIndex % 10 == 1 && $effectiveIndex % 100 != 11) {
+            $suffix = 'st';
+        } elseif ($effectiveIndex % 10 == 2 && $effectiveIndex % 100 != 12) {
+            $suffix = 'nd';
+        }elseif ($effectiveIndex % 10 == 3 && $effectiveIndex % 100 != 13) {
+            $suffix = 'rd';
+        } else {
+            $suffix = 'th';
+        }
+
+        $installmentType = $effectiveIndex . $suffix . ' Installment'; 
+    }         
+    @endphp
+    
+    {{ $installmentType }}
+    @else 
+    <span class="text-muted">N\A</span> 
+    @endif
                 
             </td>
             <td>  
