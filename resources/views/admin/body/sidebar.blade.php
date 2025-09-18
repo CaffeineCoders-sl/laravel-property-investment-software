@@ -58,7 +58,7 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="pages-signin.html">
+            <a class="nav-link" href="{{ route('approved.deposit') }}">
               Approved Deposits
             </a>
         </li>

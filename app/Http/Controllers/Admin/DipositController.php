@@ -82,4 +82,16 @@ class DipositController extends Controller
      // End Method 
 
 
+     public function AapprovedDeposit(){
+
+        $approvedDeposits = Diposit::with(['user','property','installment.investment.property'])->where('status','approved')->latest()->get();
+
+        return view('admin.backend.deposit.approved_deposit',compact('approvedDeposits'));
+
+    }
+    // End Method 
+
+
+
+
 }
