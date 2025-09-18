@@ -100,7 +100,74 @@
     @endif
         </ul>
 
-    </div>
+    </div> 
+    </div> 
+</div>
+
+<div class="col-md-8">
+    <div class="card shadow-sm">
+        <table class="table table-bordered" id="installmentTable">
+            <button id="download">Download PDF</button>
+            <thead class="table-primary">
+                <tr>
+                    <th>Property</th>
+                    <th>Installment Date</th>
+                    <th>Installment Type </th>
+                    <th>Payment Amount</th>
+                    <th>Paid Date</th>
+                    <th>Status</th>
+                </tr> 
+            </thead>
+        <tbody>
+ @php
+$downPaymentAmount = $investment->property->down_payment *  $investment->share_count;
+$totalInstallmentAmount = $investment->property->per_installment_amount * $investment->share_count;
+$startDate = \Carbon\Carbon::parse($investment->created_at);
+ @endphp
+
+ @forelse ($investment->installments as $installment) 
+
+    @php
+    if ($downPaymentAmount  > 0) {
+        $installmentNumber = $loop->index;
+    }else {
+        $installmentNumber = $loop->index + 1; 
+    }
+    $installmentDate = $startDate->copy()->addMonths($installmentNumber);
+    if ($loop->first && $downPaymentAmount > 0){
+        $type = 'Down Payment ';
+    } else  {
+        if ( $installmentNumber % 10 == 1 &&  $installmentNumber % 100 !== 11) {
+      $suffix = 'st';
+     } elseif ($installmentNumber % 10 == 2 &&  $installmentNumber % 100 !== 12) {
+        $suffix = 'nd';
+     }elseif ($installmentNumber % 10 == 3 &&  $installmentNumber % 100 !== 13) {
+        $suffix = 'rd';
+     } else {
+       $suffix = 'th';
+     }
+     $type = $installmentNumber . $suffix . ' Installment';
+    } 
+    @endphp 
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+
+@empty
+<tr>
+    <td colspan="6" class="text-center">No Installmets found</td>
+</tr>
+
+ @endforelse
+
+
+        </tbody> 
+        </table>
 
     </div>
 

@@ -55,7 +55,7 @@
     @endphp
   @forelse ($investment->installments as $installment) 
     <tr>
-    <td>
+    <td> 
         @php
             if ($downPaymentAmount  > 0) {
                 $installmentNumber = $loop->index;
