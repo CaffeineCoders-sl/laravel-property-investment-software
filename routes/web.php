@@ -119,13 +119,6 @@ Route::controller(DipositController::class)->group(function(){
    
 });
 
-Route::controller(DipositController::class)->group(function(){
-    Route::get('/pending/downpayment', 'PendingDownpayment')->name('pending.downpayment');
-    
-   
-});
-
-
 
 
 });

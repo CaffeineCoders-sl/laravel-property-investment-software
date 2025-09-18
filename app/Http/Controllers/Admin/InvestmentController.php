@@ -98,7 +98,7 @@ class InvestmentController extends Controller
                 'amount' => $downPayment,
                 'next_time' => now(),
                 'paid_time' => now(),
-                'status' => 'processing'
+                'status' => 'paid'
             ]);
 
             for ($i=1; $i <= $request->total_installment ; $i++) { 

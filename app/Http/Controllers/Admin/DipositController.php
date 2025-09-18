@@ -91,19 +91,7 @@ class DipositController extends Controller
     }
     // End Method 
 
-    public function PendingDownpayment(){
-        $installments = Installment::with(['investment.property','investment.user','disposit'])
-        ->where('down_payment', '>',0)
-        ->where('status','processing')
-        ->get();
-
-        return view('admin.backend.downpayment.pending_downpayment',compact('installments'));
-        
-
-    }
-     // End Method 
-
-
-
+   
+    
 
 }
