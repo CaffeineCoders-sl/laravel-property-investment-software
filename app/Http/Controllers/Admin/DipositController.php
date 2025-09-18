@@ -41,5 +41,45 @@ class DipositController extends Controller
     }
     // End Method 
 
+    public function AdminDepositeStatusUpdate(Request $request , $id){
+
+        $deposit = Diposit::findOrFail($id);
+        $action = $request->input('action');
+
+        if ($action === 'approved') {
+            $deposit->status = 'approved';
+
+            if ($deposit->installment_id) {
+               $installment = Installment::find($deposit->installment_id);
+               if ($installment) {
+                 $installment->status = 'paid';
+                 $installment->paid_time = now();
+                 $installment->save();
+               }
+            } 
+
+        } elseif ($action === 'rejected') {
+           $deposit->status = 'rejected';
+
+            if ($deposit->installment_id) {
+               $installment = Installment::find($deposit->installment_id);
+               if ($installment) {
+                 $installment->status = 'due';
+                 $installment->paid_time = null;
+                 $installment->save();
+               }
+            } 
+        }
+
+        $deposit->save();
+
+        $notification = array(
+            'message' => 'Deposti Status updated Successfully',
+            'alert-type' => 'success'
+        ); 
+        return redirect()->route('pending.deposit')->with($notification); 
+    }
+     // End Method 
+
 
 }
