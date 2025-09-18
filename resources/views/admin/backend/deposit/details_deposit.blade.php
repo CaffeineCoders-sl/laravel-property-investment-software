@@ -194,8 +194,44 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
         </tbody> 
         </table>
 
-    </div>
+    </div> 
+</div>
 
+
+<div class="col-md-12">
+    <div class="card shadow-sm">
+        <div class="card-header">
+    <h5 class="mb-0">User Deposit Information</h5> 
+        </div>
+    <div class="card-body">
+        <ul class="list-group list-group-flush mb-3">
+            <li class="list-group-item">
+                <strong>First Name: </strong> 
+                {{ $details->user->first_name ?? 'N/A' }}
+            </li>
+             <li class="list-group-item">
+                <strong>Last Name: </strong> 
+                {{ $details->user->last_name ?? 'N/A' }}
+            </li>
+             <li class="list-group-item">
+                <strong>User Name: </strong> 
+                {{ $details->user->name ?? 'N/A' }}
+            </li>
+            <li class="list-group-item">
+                <strong>User Email: </strong> 
+                {{ $details->user->email ?? 'N/A' }}
+            </li> 
+        </ul>
+
+    <form action="">
+        @if ( $details->status != 'approved')
+        <button type="submit" name="action" value="approved" class="btn btn-success">Approve</button> 
+        @endif
+         <button type="submit" name="action" value="rejected" class="btn btn-danger">Reject </button>
+    </form>
+
+    </div> 
+    </div> 
 </div>
 
 
