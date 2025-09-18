@@ -133,7 +133,9 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
     }else {
         $installmentNumber = $loop->index + 1; 
     }
+
     $installmentDate = $startDate->copy()->addMonths($installmentNumber);
+
     if ($loop->first && $downPaymentAmount > 0){
         $type = 'Down Payment ';
     } else  {
@@ -150,12 +152,35 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
     } 
     @endphp 
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>{{ $investment->property->title ?? 'N/A' }}</td>
+        <td>{{ $installmentDate->format('Y-m-d') }}</td>
+        <td>{{ $type }}</td>
+        <td>
+            @if ($loop->first && $investment->property->down_payment > 0)
+            {{ (int) $investment->property->down_payment }} %
+            (${{ $investment->total_amount * ($investment->property->down_payment / 100) }}) 
+            @else 
+                ${{ $totalInstallmentAmount }}
+            @endif 
+        </td>
+        <td>
+            @if ($installment->paid_time)
+                {{ \Carbon\Carbon::parse($installment->paid_time)->format('Y-m-d') }}
+            @else 
+            <span class="text-muted">Not Paid</span>
+            @endif
+        </td> 
+        <td>
+          @if ($installment->status == 'paid')
+         <span class="badge badge-success">Paid</span> 
+         @elseif ($installment->status == 'due')
+             <span class="badge badge-primary">Due</span> 
+         @elseif ($installment->status == 'processing')
+             <span class="badge badge-warning">Processing</span>
+         @else 
+          <span class="badge badge-danger">Failed</span> 
+        @endif 
+        </td>
     </tr>
 
 @empty
