@@ -44,7 +44,27 @@
             
     </ul>
 </li>
-                
+            
+
+<li class="nav-parent">
+    <a class="nav-link" href="#">
+        <i class="bx bx-file" aria-hidden="true"></i>
+        <span>Down Payment</span>
+    </a>
+    <ul class="nav nav-children">
+        <li>
+            <a class="nav-link" href="{{ route('pending.downpayment') }}">
+                Pending DownPayment
+            </a>
+        </li>
+        <li>
+            <a class="nav-link" href="{{ route('approved.deposit') }}">
+              Approved DownPayment
+            </a>
+        </li>
+        
+    </ul>
+</li>
                  
 <li class="nav-parent">
     <a class="nav-link" href="#">
