@@ -122,6 +122,7 @@ Route::controller(DipositController::class)->group(function(){
 Route::controller(DipositController::class)->group(function(){
     Route::get('/pending/downpayment', 'PendingDownpayment')->name('pending.downpayment');
     Route::put('/installment/status/update/{id}', 'UpdateInstallmentStatus')->name('installment.status.update');
+    Route::get('/approved/downpayment', 'ApprovedDownpayment')->name('approved.downpayment');
     
    
 });

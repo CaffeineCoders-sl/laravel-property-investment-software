@@ -130,6 +130,18 @@ class DipositController extends Controller
     }
     // End Method 
 
+    public function ApprovedDownpayment(){
+
+        $installments = Installment::with(['investment.property','investment.user','diposit'])
+            ->where('down_payment', '>',0)
+            ->where('status','paid')
+            ->get();
+
+        return view('admin.backend.downpayment.approved_downpayment',compact('installments'));
+
+    }
+    // End Method 
+
    
     
 
