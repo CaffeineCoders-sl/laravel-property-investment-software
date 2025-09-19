@@ -103,6 +103,33 @@ class DipositController extends Controller
     }
     // End Method 
 
+    public function UpdateInstallmentStatus(Request $request, $id){
+
+        $installment = Installment::findOrFail($id);
+
+        if ($installment->status === 'processing') {
+           $installment->status = 'paid';
+           $installment->paid_time = now();
+           $installment->amount += $installment->down_payment;
+           $installment->save();
+
+        /// Update the related Diposit status if it exists
+        if ($installment->diposit ) {
+            $installment->diposit->status = 'approved';
+            $installment->diposit->save();
+        } 
+
+        }
+
+        $notification = array(
+            'message' => 'DownPayment Status updated Successfully',
+            'alert-type' => 'success'
+        ); 
+        return redirect()->route('pending.downpayment')->with($notification); 
+
+    }
+    // End Method 
+
    
     
 

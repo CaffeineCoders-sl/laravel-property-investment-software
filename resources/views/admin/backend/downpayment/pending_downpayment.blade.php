@@ -60,7 +60,12 @@
 
             <td>{{ $installment->created_at->diffForHumans() ?? 'N/A' }}</td>
             <td>
-         <a href="{{ route('deposit.details',$installment->id) }}" class="btn btn-outline-primary btn-sm">Details</a>  
+            <form action="{{ route('installment.status.update',$installment->id) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn btn-success btn-sm">Approve</button>
+            </form>
+       
             
              </td>  
         </tr>
