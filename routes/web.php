@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PropertyController;
 use App\Http\Controllers\Admin\InvestmentController;
 use App\Http\Controllers\Admin\DipositController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Admin\ManageInvestmentController;
 
 Route::get('/', function () {
     return view('home.index');
@@ -122,9 +123,13 @@ Route::controller(DipositController::class)->group(function(){
 Route::controller(DipositController::class)->group(function(){
     Route::get('/pending/downpayment', 'PendingDownpayment')->name('pending.downpayment');
     Route::put('/installment/status/update/{id}', 'UpdateInstallmentStatus')->name('installment.status.update');
-    Route::get('/approved/downpayment', 'ApprovedDownpayment')->name('approved.downpayment');
+    Route::get('/approved/downpayment', 'ApprovedDownpayment')->name('approved.downpayment'); 
+});
+
+
+Route::controller(ManageInvestmentController::class)->group(function(){
+    Route::get('/running/investment', 'RunningInvestment')->name('running.investment');
     
-   
 });
 
 

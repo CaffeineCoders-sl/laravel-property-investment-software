@@ -20,6 +20,33 @@
                         <span>Dashboard</span>
                     </a>                        
                 </li>
+
+
+<li class="nav-parent">
+    <a class="nav-link" href="#">
+        <i class="bx bx-cart-alt" aria-hidden="true"></i>
+        <span>Investment </span>
+    </a>
+    <ul class="nav nav-children">
+        <li>
+            <a class="nav-link" href="{{ route('running.investment') }}">
+                Running Investment 
+            </a>
+        </li>
+        <li>
+            <a class="nav-link" href="{{ route('all.times') }}">
+                Completed Investment 
+            </a>
+        </li>
+        <li>
+            <a class="nav-link" href="{{ route('all.location') }}">
+                 All Investment 
+            </a>
+        </li>
+            
+    </ul>
+</li>
+
 <li class="nav-parent">
     <a class="nav-link" href="#">
         <i class="bx bx-cart-alt" aria-hidden="true"></i>
