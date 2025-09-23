@@ -2,7 +2,7 @@
 @section('admin') 
 
 <header class="page-header">
-    <h2>Running Investments</h2> 
+    <h2>Complete Investments</h2> 
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs">
             <li>
@@ -10,7 +10,7 @@
                     <i class="bx bx-home-alt"></i>
                 </a>
             </li> 
-            <li><span>Running Investments</span></li>  
+            <li><span>Complete Investments</span></li>  
         </ol>  
     </div>
 </header>
@@ -24,7 +24,7 @@
                
             </div>
 
-            <h2 class="card-title">Running Investments</h2>
+            <h2 class="card-title">Complete Investments</h2>
         </header>
         <div class="card-body">
             <div class="table-responsive">

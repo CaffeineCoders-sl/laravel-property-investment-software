@@ -41,6 +41,35 @@ class ManageInvestmentController extends Controller
     ->values();  
 
     return view('admin.backend.investment.running_investment',compact('properties'));
+
+    }
+    //End Method 
+
+
+   public function CompleteInvestment(){
+   
+    $properties = Property::whereHas('investments', function ($q) {
+        $q->where('payment_status', '!=', 'failed')
+        ->where('status','active');
+    })
+    ->with(['investments' => function($q) {
+         $q->where('payment_status', '!=', 'failed')
+          ->where('status','active')
+          ->with(['user','installments']);
+    }])
+    ->get()
+    ->filter(function ($property) {
+
+        $soldShares = $property->investments->sum('share_count');
+
+        // Return only if shares are still avaibable
+        return $soldShares >= $property->total_share;
+
+    })
+    ->sortByDesc('created_at')
+    ->values();  
+
+    return view('admin.backend.investment.complete_investment',compact('properties'));
     
     }
     //End Method 

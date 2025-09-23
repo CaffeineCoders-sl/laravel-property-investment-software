@@ -129,6 +129,7 @@ Route::controller(DipositController::class)->group(function(){
 
 Route::controller(ManageInvestmentController::class)->group(function(){
     Route::get('/running/investment', 'RunningInvestment')->name('running.investment');
+    Route::get('/complete/investment', 'CompleteInvestment')->name('complete.investment');
     
 });
 
