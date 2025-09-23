@@ -72,9 +72,12 @@
             <td>{{ implode(', ', $perShareAmounts) }} </td>
             <td>${{ $totalPaid }}</td>
             <td>${{ $totalDue }}</td> 
-            <td>
-         <a href=" " class="btn btn-success btn-sm">Property Details</a>   
-             </td>  
+           <td>
+    @if (count($property->investments) > 0)
+    <a href="{{ route('admin_property_details',$property->investments->first()->id)  }}" class="btn btn-success btn-sm">Property Details</a>   
+        
+    @endif 
+             </td>   
         </tr> 
       @empty
     <tr>
