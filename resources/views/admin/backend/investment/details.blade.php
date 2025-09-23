@@ -124,7 +124,9 @@
             <td>{{ $inv->user->email }}</td>
             <td> ${{ $paid }}</td>
             <td>${{ $due }}</td>
-            <td>Details</td>
+            <td>
+    <a href="{{ route('user.pay.history',$inv->id) }}" class="btn btn-sm btn-outline-primary">Details</a>
+            </td>
         </tr>
          
      @empty
