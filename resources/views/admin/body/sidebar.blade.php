@@ -39,7 +39,7 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('all.location') }}">
+            <a class="nav-link" href="{{ route('all.investment') }}">
                  All Investment 
             </a>
         </li>
