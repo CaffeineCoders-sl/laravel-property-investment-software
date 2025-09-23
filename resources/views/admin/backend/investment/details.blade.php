@@ -50,7 +50,7 @@
     <dd class="col-sm-7">{{ $investment->property->profit_type ?? 'N/A' }}</dd>
 
     <dt class="col-sm-5 fw-semibold">Profit Amount : </dt>
-    <dd class="col-sm-7">{{ $investment->property->profit_amount ?? 'N/A' }}</dd>
+    <dd class="col-sm-7">${{ $investment->property->profit_amount ?? 'N/A' }}</dd>
 
 <dt class="col-sm-5 fw-semibold">Profit Schedule : </dt>
     <dd class="col-sm-7">{{ $investment->property->profit_schedule ?? 'N/A' }}</dd>
@@ -61,20 +61,42 @@
 </dl>
 
     </div> 
-    </div>
-
-
-</div>
+    </div> 
 </div>
 
 
+  <!-- Investment Details --->
+    <div class="col-lg-6">
+        <div class="card border-0 shadow-sm h-100"> 
+        <div class="card-header bg-primary text-white fw-semibold">
+           Investment Details
+        </div>
+    <div class="card-body">
+<dl class="row mb-0">
+    <dt class="col-sm-5 fw-semibold">Invested Amount : </dt>
+    <dd class="col-sm-7">${{ $investment->property->per_share_amount ?? 'N/A' }}</dd>
 
+        <dt class="col-sm-5 fw-semibold">Per Installment Amount: </dt>
+    <dd class="col-sm-7">${{ $investment->property->per_installment_amount ?? 'N/A' }}</dd>
 
+        <dt class="col-sm-5 fw-semibold">Investement Status: </dt>
+    <dd class="col-sm-7">Running</dd>
+ 
+ 
+</dl>
+
+    </div> 
+    </div> 
 </div>
 
 
 
 
 
+
+
+
+</div> 
+</div> 
 
 @endsection
