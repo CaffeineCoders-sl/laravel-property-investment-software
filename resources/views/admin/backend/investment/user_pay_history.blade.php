@@ -111,14 +111,64 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
         </tbody> 
             </table>
 
+        </div> 
+    </div> 
+</div> 
+</div>
+
+ <!--- Profilt History --->
+
+ <div class="mb-5">
+    <h5 class="fw-bold text-dark mb-3">Profit History</h5>
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+<table class="table table-hover table-bordered mb-0">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Amount Per Share</th>
+            <th scope="col">Status</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @forelse ($investment->profits as $profit)
+        @php
+            $perShareAmont = $profit->profit_amount;
+        @endphp
+        <tr>
+            <td> {{ \Carbon\Carbon::parse($profit->paid_date)->format('d M, Y') }}</td>
+            <td> ${{ $perShareAmont}}</td>
+            <td>
+                @if ($profit->status === 'paid')
+           <span class="badge bg-success">Paid</span>
+               @else
+           <span class="badge bg-danger">Unpaid</span>
+                @endif 
+            </td>
+        </tr> 
+        @empty
+        <tr>
+            <td colspan="3" class="text-center text-muted py-4">No Profit data found</td>
+        </tr>
+            
+        @endforelse
+    </tbody>
+
+</table>
+
+            </div>
+
         </div>
 
     </div>
 
-</div>
+ </div>
 
 
-</div>
+
+
 
 
 </div>
