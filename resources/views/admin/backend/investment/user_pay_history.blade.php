@@ -203,6 +203,52 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
 
 
 
+  <!--- Capital Back Section --->
+
+ <div class="mb-5">
+    <h5 class="fw-bold text-dark mb-3">Capital Back</h5>
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+<table class="table table-hover table-bordered mb-0">
+    <thead>
+        <tr>
+            <th scope="col">Capital Back Type</th>
+            <th scope="col">Profit Back After Days</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+      
+        <tr>
+            <td> {{ $investment->property->capital_back ?? 'N/A' }}</td>
+            <td> {{ $investment->property->profit_back ?? 'N/A' }} Days</td>
+            <td> {{ $investment->property->per_share_amount ?? 'N/A' }}</td>
+           <td> 
+            @php
+                $alreadyCapitalBack = $investment->capitalReturn()->exists()
+            @endphp
+            @if (($investment->property->per_share_amount ?? 0) > 0 && !$alreadyCapitalBack)
+            <a href="" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure to retun capital back to this user')">Capital Back</a>
+             @else 
+            <span class="btn btn-sm btn-secondary disabled" >Back Capital</span>   
+            @endif
+           </td>
+        </tr> 
+       
+    </tbody>
+
+</table>
+
+            </div> 
+        </div> 
+    </div> 
+ </div>
+
+
+
 
 </div>
 
