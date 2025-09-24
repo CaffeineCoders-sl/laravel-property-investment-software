@@ -111,7 +111,7 @@ class ManageInvestmentController extends Controller
         $investment = Investment::with(['user','property','installments'])->findOrFail($id);
         return view('admin.backend.investment.user_pay_history',compact('investment'));
 
-    }
+    } 
      //End Method
 
 

@@ -158,15 +158,48 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
 
 </table>
 
-            </div>
-
-        </div>
-
-    </div>
-
+            </div> 
+        </div> 
+    </div> 
  </div>
 
 
+ <!--- Capital Return  --->
+
+ <div class="mb-5">
+    <h5 class="fw-bold text-danger mb-3">Capital Return</h5>
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+<table class="table table-hover table-bordered mb-0">
+    <thead>
+        <tr>
+            <th scope="col">Capital Return</th> 
+        </tr>
+    </thead>
+
+    <tbody>
+         <tr>
+            <td>
+                @if ($investment->capitalReturn )
+                  <div class="text-success">
+    Capital Back: $ {{ $investment->capitalReturn->amount }} on Date 
+    {{ \Carbon\Carbon::parse($investment->capitalReturn->paid_date)->format('d M, Y') }}
+   ( TRX ID : {{$investment->capitalReturn->trx}} ) 
+                  </div>
+                @else  
+            <span class="text-muted">No Capital Return data available</span>
+                @endif
+            </td>
+         </tr>
+    </tbody>
+
+</table>
+
+            </div> 
+        </div> 
+    </div> 
+ </div>
 
 
 
