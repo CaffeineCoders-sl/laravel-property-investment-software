@@ -45,13 +45,50 @@
         <select id="userFilter">
             <option value=""> -- Select User --</option> 
         </select>
-    </div>
+    </div>  
+       </div>
+       
+       
+    <table class="table table-bordered table-striped mb-0">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Property | Invest Id</th>
+                <th>Installment Date</th>
+                <th>Installment Amount</th>
+                <th>Invest Amount</th>
+                <th>Paid Amount </th>
+                <th>Due Amount</th>
+                <th>Status</th> 
+            </tr>
+        </thead>
 
+    <tbody>
+    @foreach ($installments as $userId => $userInstallments )
+    @php
+        $user = optional($userInstallments->first()->investment->user)
+    @endphp 
+    
+    @foreach ($userInstallments as $installment) 
+    <tr class="installment-row" data-property="{{ $installment->investment->property->id ?? ''  }}" data-user="{{ $userId }}">
+        <td> {{ $user->first_name ?? 'N/A' }} {{ $user->last_name ?? 'N/A' }} </td>
+        
+        <td> {{ optional($installment->investment->property)->title ?? 'N/A'  }} </td>
+        
+        <td> {{ $installment->paid_time ? \Carbon\Carbon::parse($installment->paid_time)->format('d M Y') : '-' }} 
+            <small>Next: {{ \Carbon\Carbon::parse($installment->next_time)->format('d M Y') }}</small> 
+        </td>
+        <td>${{ $installment->amount }}</td>
+        <td>${{ $installment->investment->total_amount }}</td>
+        <td></td>
+        <td></td>
+    </tr>
+        @endforeach
+    @endforeach
+ 
+    </tbody> 
+    </table> 
 
-
-
-
-        </div> 
     </div>
 
 </section>
