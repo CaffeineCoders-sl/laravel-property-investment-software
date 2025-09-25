@@ -231,7 +231,7 @@ $startDate = \Carbon\Carbon::parse($investment->created_at);
                 $alreadyCapitalBack = $investment->capitalReturn()->exists()
             @endphp
             @if (($investment->property->per_share_amount ?? 0) > 0 && !$alreadyCapitalBack)
-            <a href="" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure to retun capital back to this user')">Capital Back</a>
+            <a href="{{ route('admin.capital.back',$investment->id) }}" class="btn btn-sm btn-primary" onclick="return confirm('Are you sure to retun capital back to this user')">Capital Back</a>
              @else 
             <span class="btn btn-sm btn-secondary disabled" >Back Capital</span>   
             @endif

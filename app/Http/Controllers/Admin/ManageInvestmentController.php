@@ -14,6 +14,7 @@ use App\Models\Diposit;
 use App\Models\Time;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use App\Models\CapitalReturn;
 
 class ManageInvestmentController extends Controller
 {
@@ -113,6 +114,48 @@ class ManageInvestmentController extends Controller
 
     } 
      //End Method
+
+    public function AdminCapitalBack($investmentId){
+
+        DB::beginTransaction();
+        try {
+     $investment = Investment::with('property')->findOrFail($investmentId);
+
+     if ($investment->capitalReturn) {
+        return back()->with('error','Capital already returned for this user');
+     }
+
+     $property = $investment->property;
+
+     if (!$property->per_share_amount || $property->per_share_amount <= 0) {
+        return back()->with('error','Per share amount is not defined for this property');
+     }
+
+     CapitalReturn::create([
+        'investment_id' => $investment->id,
+        'user_id' => $investment->user_id,
+        'property_id' => $property->id,
+        'amount' => $investment->share_count * $property->per_share_amount,
+        'paid_date' => now(),
+        'trx' => strtoupper(Str::random(10)),
+        'status' => 'paid',
+     ]);
+     DB::commit();
+
+     $notification = array(
+            'message' => 'Capital return to the user Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+        } catch (\Exception $e) {
+           DB::rollBack();
+           return back()->with('error','Failed to reutn capital'.$e->getMessage());
+        }
+
+    }
+     //End Metho
 
 
 
