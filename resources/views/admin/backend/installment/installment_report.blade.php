@@ -80,8 +80,29 @@
         </td>
         <td>${{ $installment->amount }}</td>
         <td>${{ $installment->investment->total_amount }}</td>
-        <td></td>
-        <td></td>
+@php
+    static $investmentTotals = []; // investment wise total amount
+    static $investmentPaid = []; //Investment wise running paid amount
+
+    $investmentId = $installment->investment->id ?? null;
+    $total = $installment->investment->total_amount ?? 0;
+    
+    // first time installment
+    if (!isset($investmentTotals[$investmentId])) {
+       $investmentTotals[$investmentId] = $total;
+       $investmentPaid[$investmentId] = 0;
+    }
+
+    // increament only if current installment is paid
+    if ($installment->status == 'paid') {
+        $investmentPaid[$investmentId] += $installment->amount;
+    }
+    $paid = $investmentPaid[$investmentId];
+    $due = $investmentTotals[$investmentId] - $paid;  
+@endphp
+        
+        <td>${{ $paid  }}</td>
+        <td>${{ $due }}</td>
         <td>
             @if ($installment->status == 'paid')
             <span class="badge bg-success">Paid</span>
