@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\InvestmentController;
 use App\Http\Controllers\Admin\DipositController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\Admin\ManageInvestmentController;
+use App\Http\Controllers\Admin\ProfitController;
 
 Route::get('/', function () {
     return view('home.index');
@@ -139,6 +140,13 @@ Route::controller(ManageInvestmentController::class)->group(function(){
     Route::get('/admin/intallment/report', 'AdminInstallmentReport')->name('intallment.report');
     
 });
+
+
+Route::controller(ProfitController::class)->group(function(){
+    Route::get('/pending/profit', 'PendingProfit')->name('pending.profit');
+   
+});
+
 
 
 

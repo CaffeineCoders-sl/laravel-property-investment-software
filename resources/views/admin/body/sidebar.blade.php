@@ -43,6 +43,12 @@
                  All Investment 
             </a>
         </li>
+
+         <li>
+            <a class="nav-link" href="{{ route('pending.profit') }}">
+               Pending Profit 
+            </a>
+        </li>
             
     </ul>
 </li>
