@@ -61,6 +61,45 @@ $profits = $properties->map(function ($p) {
     }
     //End Method 
 
+    public function AdminProfitDischarge(Request $request){
+
+    $property = Property::with(['investments'])->findOrFail($request->property_id);
+    $investments = $property->investments;
+    $investorCount = $investments->count();
+
+    if ($investorCount === 0) {
+       return back()->with(['message' => 'No Investors found for this property', 'alert-type' => 'error']);
+    }
+
+    $monthlyProfit = (float)  $property->profit_amount;
+    $repeatTime = max(1, (int) ($property->repeat_time ?? 1));
+    $schedule = $property->profit_schedule ?? 'monthly';
+
+    if (in_array($schedule, ['one-time','life-time'])) {
+        $plannedTotal = $monthlyProfit * $investorCount;
+    } else {
+        $plannedTotal = $monthlyProfit * $repeatTime * $investorCount;
+    }
+
+    $alreadyPaid = (float) Profit::where('property_id',$property->id)
+                    ->where('status','paid')
+                    ->sum('profit_amount');
+
+    $remaining = round(max(0, $plannedTotal - $alreadyPaid ), 2);
+
+    if ($remaining <= 0) {
+          return back()->with(['message' => 'All Scheduled profit alrady distributed', 'alert-type' => 'info']);
+    }
+
+    $discharge = min($monthlyProfit * $investorCount, $remaining );
+
+    
+
+    
+
+    }
+    //End Method 
+
 
 
 }

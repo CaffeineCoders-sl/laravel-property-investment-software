@@ -52,8 +52,10 @@
     <!--- Modal Stated ----> 
     <div class="modal fade" id="modal{{ $item->property_id }}" tabindex="-1" aria-labelledby="modalLable{{ $item->property_id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg">
-        
-    <form action="">
+
+    <form method="POST" action="{{ route('admin.profit.discharge') }}">
+        @csrf
+
         <div class="modal-content border-0 shadow-sm">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title fw-bold" id="modalLable{{ $item->property_id }}">
