@@ -18,11 +18,49 @@ use App\Models\CapitalReturn;
 
 class ProfitController extends Controller
 {
-    public function PendingProfit(){
+
+public function PendingProfit(){
+
+    $properties = Property::with(['investments'])
+                ->where('profit_amount', '>', 0)
+                ->get();
+
+$profits = $properties->map(function ($p) {
+    $monthlyProfit = (float)  $p->profit_amount;
+    $repeatTime = max(1, (int) ($p->repeat_time ?? 1));
+    $schedule = $p->profit_schedule ?? 'monthly';
+    $investorCount = $p->investments->count();
+
+    if (in_array($schedule, ['one-time','life-time'])) {
+        $plannedTotal = $monthlyProfit * $investorCount;
+    } else {
+        $plannedTotal = $monthlyProfit * $repeatTime * $investorCount;
+    }
+
+    $alreadyPaid = (float) Profit::where('property_id',$p->id)
+                    ->where('status','paid')
+                    ->sum('profit_amount');
+
+    $remaining = round(max(0, $plannedTotal - $alreadyPaid ), 2);
+
+    return (object) [
+        'property'  => $p,
+        'property_id'  => $p->id,
+        'investor_count'  => $investorCount,
+        'monthly_profit'  => $monthlyProfit,
+        'repeat_time'  => $repeatTime,
+        'schedule'  => $schedule,
+        'planned_total'  => $plannedTotal,
+        'already_paid'  => $alreadyPaid,
+        'remaining_total'  => $remaining, 
+    ];
+    })->filter(fn ($row) => $row->remaining_total > 0)
+    ->values();
+    return view('admin.backend.profit.pending_profit',compact('profits'));
 
     }
     //End Method 
 
 
-    
+
 }
