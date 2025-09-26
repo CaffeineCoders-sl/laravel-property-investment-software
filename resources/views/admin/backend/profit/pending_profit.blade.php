@@ -52,6 +52,7 @@
     <!--- Modal Stated ----> 
     <div class="modal fade" id="modal{{ $item->property_id }}" tabindex="-1" aria-labelledby="modalLable{{ $item->property_id }}" aria-hidden="true">
     <div class="modal-dialog modal-lg">
+        
     <form action="">
         <div class="modal-content border-0 shadow-sm">
             <div class="modal-header bg-primary text-white">
@@ -77,12 +78,25 @@
 
         <p class="mb-2"><strong class="fw-semibold">Remaining:</strong> ${{ $item->remaining_total }} </p> 
           </div>
-
-        </div>
-
+     
+        <div class="col-12">
+            <label for="payoutInput{{ $item->property_id }}" class="form-label fw-semibold">This Month Payout</label>
+            <div class="input-group">
+                <span class="input-group-text bg-light">$</span>
+            <input type="number" step="0.01" class="form-control" id="payoutInput{{ $item->property_id }}" value="{{ $thisPayout }}" readonly>
+            <span class="input-group-text bg-light">USD</span> 
+            </div> 
+        </div> 
+        </div> 
+    <input type="hidden" name="property_id" id="{{ $item->property_id }}">
+ 
     </div>
 
-        </div> 
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+        <button type="submit" class="btn btn-success" {{ $item->remaining_total <= 0 ? 'disabled' : '' }}>Confim Distribute</button>
+      </div>  
+     </div> 
     </form>
     </div>
        
