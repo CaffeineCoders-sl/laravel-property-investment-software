@@ -46,7 +46,58 @@
             <td>{{ $item->repeat_time }}</td>
             
             <td>
-    <button class="btn btn-primary">Discharge</button>    
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal{{ $item->property_id }}" >Discharge</button>
+    
+
+    <!--- Modal Stated ----> 
+    <div class="modal fade" id="modal{{ $item->property_id }}" tabindex="-1" aria-labelledby="modalLable{{ $item->property_id }}" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+    <form action="">
+        <div class="modal-content border-0 shadow-sm">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold" id="modalLable{{ $item->property_id }}">
+               Discharge:  {{ $item->property->title }} </h5>
+               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> 
+            </div>
+
+    @php
+        $thisPayout = min($item->monthly_profit * $item->investor_count, $item->remaining_total );
+    @endphp
+
+    <div class="modal-body">
+        <div class="row g-3">
+            <div class="col-12">
+        <p class="mb-2"><strong class="fw-semibold">Total Investors:</strong> {{ $item->investor_count }} </p>
+
+        <p class="mb-2"><strong class="fw-semibold">Profti (PerPeriod):</strong> ${{ $item->monthly_profit }} </p>
+
+        <p class="mb-2"><strong class="fw-semibold">Repeat Time:</strong> {{ $item->repeat_time }} Months</p>
+
+        <p class="mb-2"><strong class="fw-semibold">Total Profit to Distribute:</strong> ${{ $item->planned_total }} </p>
+
+        <p class="mb-2"><strong class="fw-semibold">Remaining:</strong> ${{ $item->remaining_total }} </p> 
+          </div>
+
+        </div>
+
+    </div>
+
+        </div> 
+    </form>
+    </div>
+       
+
+
+    </div>
+     <!--- End Modal Stated ----> 
+
+
+
+
+
+
+
+
              </td>  
         </tr>
       @endforeach  
