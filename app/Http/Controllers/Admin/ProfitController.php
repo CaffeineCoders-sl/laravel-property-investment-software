@@ -93,10 +93,33 @@ $profits = $properties->map(function ($p) {
 
     $discharge = min($monthlyProfit * $investorCount, $remaining );
 
-    
+    $dischargeCents = (int) round($discharge * 100);
+    $perInvestorCents = intdiv($dischargeCents,$investorCount);
+    $remainderCents = $dischargeCents % $investorCount;
 
-    
+    DB::transaction(function () use( $investments,$perInvestorCents,$remainderCents,$property){
+        foreach($investments->values() as $idx => $investment) {
+            $amountCents = $perInvestorCents + ($idx < $remainderCents ? 1 : 0);
+            $amount = $amountCents / 100;
+        
+            Profit::create([
+                'investment_id' => $investment->id,
+                'user_id' => $investment->user_id,
+                'property_id' => $property->id,
+                'profit_amount' => $amount,
+                'paid_date' => \Carbon\Carbon::now()->toDateString(),
+                'status' => 'paid', 
+            ]);
 
+        } 
+    });   
+    
+    $notification = array(
+            'message' => 'One period profit discharge succesfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->route('pending.profit')->with($notification); 
     }
     //End Method 
 

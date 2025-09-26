@@ -90,7 +90,7 @@
             </div> 
         </div> 
         </div> 
-    <input type="hidden" name="property_id" id="{{ $item->property_id }}">
+    <input type="hidden" name="property_id" value="{{ $item->property_id }}">
  
     </div>
 
