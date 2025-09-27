@@ -135,7 +135,7 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('approved.deposit') }}">
+            <a class="nav-link" href="{{ route('profit.report') }}">
               Profit Reports
             </a>
         </li>

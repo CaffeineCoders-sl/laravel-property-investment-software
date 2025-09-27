@@ -123,6 +123,12 @@ $profits = $properties->map(function ($p) {
     }
     //End Method 
 
+    public function ProfitReport(){
+        $profits = Profit::with(['property','investment','user'])->where('status','paid')->latest()->get()->groupBy('user_id');
+        return view('admin.backend.profit.profit_report',compact('profits'));
+    }
+    //End Method 
+
 
 
 }

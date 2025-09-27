@@ -145,6 +145,7 @@ Route::controller(ManageInvestmentController::class)->group(function(){
 Route::controller(ProfitController::class)->group(function(){
     Route::get('/pending/profit', 'PendingProfit')->name('pending.profit');
     Route::post('/admin/profit/discharge', 'AdminProfitDischarge')->name('admin.profit.discharge');
+    Route::get('/profit/report', 'ProfitReport')->name('profit.report');
    
 });
 
