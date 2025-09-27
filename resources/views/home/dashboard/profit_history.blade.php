@@ -71,14 +71,49 @@
 
         </tbody>
     </table>
-                </div>
-                                    </div>
+         </div>
+         </div>
+
+
+    <!---- Capital Return --->
+
+    <div class="mt-4">
+        <h5 class="text-danger">Capital Return</h5>
+        <table class="table table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th>Capital Return </th>
+                </tr> 
+            </thead>
+
+    <tbody>
+        <tr>
+            <td>
+                @if (isset($investment->capitalReturn) && $investment->capitalReturn)
+            <div class="mt-2 text-success">
+        Capital Back: ${{ $investment->capitalReturn->amount }}
+        on {{ \Carbon\Carbon::parse($investment->capitalReturn->paid_date)->format('d M, Y') }}
+        (TRX:{{ $investment->capitalReturn->trx }} )
+            </div> 
+            
+            @else
+              <div class="text-danger">
+                <p>Capital is not return Yet</p>
+              </div>      
+            @endif
+            </td>
+        </tr>
+    </tbody>
+
+        </table>
+
     </div>
-                </div>
-
-                
 
 
+
+      </div>
+       </div>
+ 
 
 
             </div>
