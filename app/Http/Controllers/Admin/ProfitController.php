@@ -15,6 +15,7 @@ use App\Models\Time;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Models\CapitalReturn;
+use App\Models\Withdraw;
 
 class ProfitController extends Controller
 {
@@ -144,6 +145,20 @@ $profits = $properties->map(function ($p) {
                      ->first();
 
         return view('home.dashboard.profit_history',compact('profits','investment'));
+     }
+     // End Method
+
+
+      public function WithdrawMoney(){
+
+        $userId = auth()->id();
+        $profits = Profit::with(['property'])->where('user_id',$userId)->where('status','paid')->get()->groupBy('property_id');
+
+        $withdraws = Withdraw::where('user_id',$userId)->where('status','approved')->get()->groupBy('property_id');
+
+        $capitalReturns = CapitalReturn::with(['property'])->where('user_id',$userId)->where('status','paid')->get()->groupBy('property_id'); 
+
+        return view('home.dashboard.withdraw_money',compact('profits','withdraws','capitalReturns'));
      }
      // End Method
 

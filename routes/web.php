@@ -30,8 +30,7 @@ Route::get('/dashboard', function () {
 
 Route::controller(UserController::class)->group(function(){
     
-    Route::get('/deposit/money', 'DepositMoney')->name('deposit.money');
-    Route::get('/withdraw/money', 'WithdrawMoney')->name('withdraw.money');
+    Route::get('/deposit/money', 'DepositMoney')->name('deposit.money'); 
     Route::get('/transactions', 'Transactions')->name('transactions');
     Route::get('/profile/setting', 'ProfileSetting')->name('profile.setting');
     Route::get('/user/change/password', 'UserChangePassword')->name('user.change.password');
@@ -58,7 +57,7 @@ Route::controller(InvestmentController::class)->group(function(){
 
 Route::controller(ProfitController::class)->group(function(){
     Route::get('/profit/history', 'ProfitHistory')->name('profit.history');
-
+    Route::get('/withdraw/money', 'WithdrawMoney')->name('withdraw.money');
 });
 
 
