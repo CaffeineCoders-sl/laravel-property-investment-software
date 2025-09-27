@@ -37,31 +37,40 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
                             <div class="table-responsive table--responsive--xl">
-                    <table class="table custom--table">
-                        <thead>
-                            <tr>
-                                <th>Property</th>
-                                <th>Investment Id</th>
-                                <th>TRX</th>
-                                <th>Amount</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                                                            <tr>
-                                    <td>Luxury Penthouse</td>
-                                    <td>6UUA19ARD4</td>
-                                    <td>HMYHQAE2COVR</td>
-                                    <td>$999.99</td>
-                                    <td>
-                                        <div>
-                                            2024-04-20 12:00 AM<br>
-                                            <span class="small">1 year ago</span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                                    </tbody>
-                    </table>
+    <table class="table custom--table">
+        <thead>
+            <tr>
+                <th>Property</th>
+                <th>Investment Id</th> 
+                <th>Amount</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse ($profits as $profit) 
+               <tr>
+                    <td>{{ optional($profit->property)->title ?? 'N\A' }}</td>
+                    <td>#INV{{ $profit->investment_id  }}</td> 
+                    <td>${{ $profit->profit_amount  }}</td>
+                    <td>
+                        <div> 
+         <span class="small">{{ \Carbon\Carbon::parse($profit->paid_date)->diffForHumans() }}</span>
+                        </div>
+                    </td>
+                </tr>
+
+           @empty
+           <tr>
+            <td colspan="5" class="text-center text-muted">
+                No Profit History Found.
+            </td>
+           </tr>
+                
+           @endforelse
+
+
+        </tbody>
+    </table>
                 </div>
                                     </div>
     </div>
