@@ -68,13 +68,30 @@
         </thead>
 
     <tbody>
-    @foreach ($profits as $userId => $userProfits )
+    @forelse ($profits as $userId => $userProfits )
     @php
         $user = optional($userProfits->first()->user);
-    @endphp 
+    @endphp  
     
-     
-    @endforeach
+    @foreach ($userProfits as $profit)
+    <tr class="profit-row" data-property="{{ $profit->property->id ?? '' }}" data-user="{{$userId }}">
+     <td>{{ $user->first_name ?? 'N/A' }}  {{ $user->last_name ?? 'N/A' }}</td>
+     <td> {{ $profit->property->title ?? 'N/A' }} </td>
+     <td>#INV-{{ $profit->investment_id }}</td>
+     <td> {{ $profit->investment->total_amount }}</td>
+     <td>
+        <span class="badge badge-success">
+            ${{ $profit->profit_amount }}
+        </span>
+     </td>
+     <td>{{ \Carbon\Carbon::parse($profit->paid_date)->format('M d, Y') }}</td> 
+    </tr> 
+    @endforeach 
+    @empty
+    <tr>
+        <td colspan="6" class="text-center text-muted">No profit data found</td>
+    </tr> 
+    @endforelse
  
     </tbody> 
     </table> 
@@ -90,7 +107,7 @@
       const propertyFilter = document.getElementById("propertyFilter");
       const userFilterWrapper = document.getElementById("userFilterWrapper");
       const userFilter = document.getElementById("userFilter");
-      const rows = document.querySelectorAll(".installment-row");
+      const rows = document.querySelectorAll(".profit-row");
 
       // Default rows hide
       rows.forEach(row => row.style.display = "none");
