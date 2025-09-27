@@ -29,8 +29,7 @@ Route::get('/dashboard', function () {
 
 
 Route::controller(UserController::class)->group(function(){
-   
-    Route::get('/profit/history', 'ProfitHistory')->name('profit.history');
+    
     Route::get('/deposit/money', 'DepositMoney')->name('deposit.money');
     Route::get('/withdraw/money', 'WithdrawMoney')->name('withdraw.money');
     Route::get('/transactions', 'Transactions')->name('transactions');
@@ -56,6 +55,12 @@ Route::controller(InvestmentController::class)->group(function(){
    
 
 });
+
+Route::controller(ProfitController::class)->group(function(){
+    Route::get('/profit/history', 'ProfitHistory')->name('profit.history');
+
+});
+
 
 
 

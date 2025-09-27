@@ -13,7 +13,7 @@
             <span class="icon"><i class="fas fa-dolly-flatbed"></i></span>
             <span class="text">My Investments</span>
         </a>
-    </li>
+    </li> 
     <li class="sidebar-menu-list__item">
         <a href="{{ route('profit.history') }}" class="sidebar-menu-list__link  {{ request()->routeIs('profit.history') ? 'active' : '' }}">
             <span class="icon"><i class="fas fa-coins"></i></span>

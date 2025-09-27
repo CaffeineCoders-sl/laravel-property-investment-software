@@ -130,5 +130,24 @@ $profits = $properties->map(function ($p) {
     //End Method 
 
 
+     public function ProfitHistory(){
+
+        $profits = Profit::with(['property','investment'])
+                    ->where('user_id', auth()->id())
+                    ->where('status','paid')
+                    ->latest('paid_date')->orderBy('id','desc')->get();
+        
+        $investment = Investment::with('capitalReturn')
+                     ->where('user_id', auth()->id())
+                     ->whereHas('capitalReturn')
+                     ->latest()
+                     ->first();
+
+        return view('home.dashboard.profit_history',compact('profits','investment'));
+     }
+     // End Method
+
+
+
 
 }
