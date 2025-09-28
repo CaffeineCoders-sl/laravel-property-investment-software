@@ -59,6 +59,7 @@ Route::controller(ProfitController::class)->group(function(){
     Route::get('/profit/history', 'ProfitHistory')->name('profit.history');
     Route::get('/withdraw/money', 'WithdrawMoney')->name('withdraw.money');
     Route::post('/deposit/withdraw', 'DepositWithdraw')->name('deposit.withdraw');
+    Route::post('/capital/return/withdraw', 'CapitalReturnWithdraw')->name('capital.return.withdraw');
 });
 
 

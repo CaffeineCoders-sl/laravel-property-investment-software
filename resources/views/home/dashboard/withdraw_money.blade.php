@@ -146,7 +146,7 @@
         </div>
 
     @if ($availableCapital > 0)
-    <form action="" method="POST" >
+    <form action="{{ route('capital.return.withdraw') }}" method="POST" >
         @csrf
     <input type="hidden" name="capital_return_id" value="{{$returns->first()->id}}">   
     <input type="hidden" name="property_id" value="{{ $propertyId }}">
