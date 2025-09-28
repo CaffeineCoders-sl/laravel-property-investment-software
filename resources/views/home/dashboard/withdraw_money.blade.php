@@ -124,16 +124,37 @@
 
      @empty
         <p class="text-muted text-center">No Profit available for withdrawal </p>
+    @endforelse 
+
+</div>
+
+   @forelse ($capitalReturns as $propertyId => $returns)
+    @php
+        $property = $returns->first()->property;
+        $totalCapital = $returns->sum('amount');
+        $withdrawnCapital = \App\Models\CapitalReturn::where('user_id',auth()->id())->where('property_id',$propertyId)
+            ->where('status','pending')
+            ->sum('amount');
+
+        $availableCapital = $totalCapital - $withdrawnCapital;
+    @endphp
+
+    <div class="card mb-4">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <strong>Property: </strong>{{ $property->title }}
+            <span class="badge bg-primary">Available Capital:</span> ${{ $availableCapital }} 
+        </div>
+
+    </div>
+
+    @empty
+
     @endforelse
 
 
 
-</div>
-      </div>
 
-
-
-
+      </div> 
             </div>
         </div>
     </div> 
