@@ -162,6 +162,54 @@ $profits = $properties->map(function ($p) {
      }
      // End Method
 
+     public function DepositWithdraw(Request $request){
+
+        $request->validate([
+            'property_id' => 'required|exists:properties,id',
+            'withdraw_amount' => 'required',
+            'payment_type' => 'required'
+        ]);
+
+        $userId = auth()->id();
+        $propertyId = $request->property_id;
+
+
+        $totalProfit = Profit::where('user_id',$userId )
+                    ->where('property_id',$propertyId)
+                    ->sum('profit_amount');
+
+        $totalWithdrawn = Withdraw::where('user_id',$userId )
+                    ->where('property_id',$propertyId)
+                    ->sum('receivable_amount');
+
+        $availableProfit = $totalProfit - $totalWithdrawn;
+
+        if ($request-> receivable_amount > $availableProfit) {
+            return back()->with('error','Insufficient profit balance for withdrawal'); 
+        }
+
+     Withdraw::create([
+        'user_id' => $userId,
+        'property_id' => $propertyId,
+        'withdraw_amount' => $request->withdraw_amount,
+        'charge' => $request->charge,
+        'receivable_amount' => $request->receivable_amount,
+        'payment_type' => $request->payment_type,
+        'trx' => strtoupper(Str::random(12)),
+        'status' => 'pending',
+
+     ]);
+
+     $notification = array(
+            'message' => 'Withdrawal request submitted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification); 
+
+     }
+     // End Method
+
 
 
 

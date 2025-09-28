@@ -41,7 +41,7 @@
    
 
 
-<form action=" " method="post" class="withdraw-form">
+<form action="{{ route('deposit.withdraw') }}" method="post" class="withdraw-form">
     @csrf
  
     <input type="hidden" name="property_id" value="{{ $propertyId }}" >
