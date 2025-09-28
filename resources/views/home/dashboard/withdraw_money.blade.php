@@ -145,10 +145,33 @@
             <span class="badge bg-primary">Available Capital:</span> ${{ $availableCapital }} 
         </div>
 
+    @if ($availableCapital > 0)
+    <form action="" method="POST" >
+        @csrf
+    <input type="hidden" name="capital_return_id" value="{{$returns->first()->id}}">   
+    <input type="hidden" name="property_id" value="{{ $propertyId }}">
+    <input type="hidden" name="max-amount" value="{{ $availableCapital }}">
+    <input type="hidden" name="withdraw_type" value="capital">
+
+    <div class="deposit-info__input-group input-group">
+        <span class="deposit-info__input-group-text px-3">$</span>
+        <input type="number" class="form-control" name="withdraw_amount" value="{{ $availableCapital }}"> 
+    </div>
+
+    <button type="submit" class="btn btn--base w-100 mt-3">
+        Confirm Capital Withdraw 
+    </button> 
+
+    </form>
+    @else  
+    <p class="text-muted text-center">No capital available for withdrawal </p>
+        
+    @endif 
+
     </div>
 
     @empty
-
+   <p class="text-muted text-center">No capital available for withdrawal </p>
     @endforelse
 
 
