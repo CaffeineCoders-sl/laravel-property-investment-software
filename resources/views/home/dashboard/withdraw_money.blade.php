@@ -25,6 +25,22 @@
                                             </div>
                     <div class="row justify-content-center">
     <div class="col-lg-12">
+    @forelse ($profits as $propertyId => $propertyProfits)
+    @php
+        $property = $propertyProfits->first()->property;
+        $totalProfit = $propertyProfits->sum('profit_amount');
+        $withdrawn = $withdraws->get($propertyId, collect())->sum('withdraw_amount');
+        $availableProfit = $totalProfit - $withdrawn;
+    @endphp
+    <div class="card mb-4">
+        <div class="card-header bg-light d-flex justify-content-between align-items-center">
+            <strong>Property: </strong> {{ $property->title }}
+            <span class="badge bg-info">Available Profit: ${{ $availableProfit }}</span>
+        </div>
+    </div>     
+   
+
+
 <form action="//realvest/user/withdraw" method="post" class="withdraw-form">
 <input type="hidden" name="_token" value="AgrQteztDPUt9ULMougURIKUlrFDk0lPkode5Rzl" autocomplete="off">            <div class="gateway-card">
     <div class="row justify-content-center gy-sm-4 gy-3">
@@ -124,9 +140,17 @@
     </div>
 </div>
         </form>
+        
     </div>
+
+     @empty
+        <p class="text-muted text-center">No Profit available for withdrawal </p>
+    @endforelse
+
+
+
 </div>
-                </div>
+      </div>
 
 
 
