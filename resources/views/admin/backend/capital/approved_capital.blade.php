@@ -2,7 +2,7 @@
 @section('admin') 
 
 <header class="page-header">
-    <h2>Pending Capital </h2> 
+    <h2>Approved Capital </h2> 
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs">
             <li>
@@ -10,7 +10,7 @@
                     <i class="bx bx-home-alt"></i>
                 </a>
             </li> 
-            <li><span>Pending Capital</span></li>  
+            <li><span>Approved Capital</span></li>  
         </ol>  
     </div>
 </header>
@@ -22,7 +22,7 @@
         <header class="card-header">
              
 
-            <h2 class="card-title"> Pending All Capital</h2>
+            <h2 class="card-title"> Approved All Capital</h2>
         </header>
         <div class="card-body">
             <div class="table-responsive">
@@ -38,7 +38,7 @@
         </tr>
     </thead>
     <tbody>
-      @forelse ($pendingCapital as $item) 
+      @forelse ($approvedCapital as $item) 
         <tr>
             <td>${{ $item->amount  }}   </td>
             <td>{{ $item->created_at->format('Y-m-d h:i A') }} <br>

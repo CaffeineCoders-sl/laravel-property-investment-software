@@ -178,7 +178,7 @@
             </a>
         </li>
         <li>
-            <a class="nav-link" href="{{ route('approved.withdraw') }}">
+            <a class="nav-link" href="{{ route('approved.capital') }}">
              Approved Capital Withdraw
             </a>
         </li>

@@ -165,6 +165,8 @@ Route::controller(ProfitController::class)->group(function(){
 
 Route::controller(ProfitController::class)->group(function(){
     Route::get('/pending/capital', 'PendingCapital')->name('pending.capital');
+    Route::get('/approved/capital', 'ApprovedCapital')->name('approved.capital');
+    Route::post('/approved/capital/update/{id}', 'ApprovedCapitalStatusUpdate')->name('admin.approved.status.update');
      
  
 });
