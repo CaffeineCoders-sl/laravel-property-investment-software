@@ -289,6 +289,13 @@ $profits = $properties->map(function ($p) {
     }
      // End Method
 
+     public function PendingCapital(){
+
+        $pendingCapital = CapitalReturn::with(['user','property'])->where('status','pending')->get();
+        return view('admin.backend.capital.pending_capital',compact('pendingCapital')); 
+     }
+      // End Method
+
 
 
 

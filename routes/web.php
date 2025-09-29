@@ -163,6 +163,12 @@ Route::controller(ProfitController::class)->group(function(){
  
 });
 
+Route::controller(ProfitController::class)->group(function(){
+    Route::get('/pending/capital', 'PendingCapital')->name('pending.capital');
+     
+ 
+});
+
 
 
 
