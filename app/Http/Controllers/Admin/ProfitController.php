@@ -251,6 +251,23 @@ $profits = $properties->map(function ($p) {
      }
        // End Method
 
+    public function ApprovedWithdraw(){
+
+    $withdraws = Withdraw::with(['user','property'])
+                ->where('status','approved')
+                ->latest()
+                ->get();
+    return view('admin.backend.withdraw.approved_withdraw',compact('withdraws'));
+
+    }
+    // End Method
+
+    public function AdminWithdrawDetails($id){
+        $details = Withdraw::with(['user','property'])->findOrFail($id);
+        return view('admin.backend.withdraw.details_withdraw',compact('details')); 
+    }
+    // End Method
+
 
 
 

@@ -2,7 +2,7 @@
 @section('admin') 
 
 <header class="page-header">
-    <h2>Pending Withdraw </h2> 
+    <h2>Approved Withdraw </h2> 
     <div class="right-wrapper text-end">
         <ol class="breadcrumbs">
             <li>
@@ -10,7 +10,7 @@
                     <i class="bx bx-home-alt"></i>
                 </a>
             </li> 
-            <li><span>Pending Withdraw</span></li>  
+            <li><span>Approved Withdraw</span></li>  
         </ol>  
     </div>
 </header>
@@ -22,7 +22,7 @@
         <header class="card-header">
              
 
-            <h2 class="card-title"> Pending All Withdraw</h2>
+            <h2 class="card-title"> Approved All Withdraw</h2>
         </header>
         <div class="card-body">
             <div class="table-responsive">
