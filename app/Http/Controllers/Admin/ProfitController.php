@@ -268,6 +268,27 @@ $profits = $properties->map(function ($p) {
     }
     // End Method
 
+    public function AdminWithdrawStatusUpdate(Request $request, $id){
+
+        $withdraws = Withdraw::findOrFail($id);
+        $action = $request->input('action');
+
+        if ($action === 'approved') {
+            $withdraws->status = 'approved';
+        } elseif ($action === 'rejected') {
+            $withdraws->status = 'rejected';
+        }
+        $withdraws->save();
+
+         $notification = array(
+            'message' => 'Withdraw request Approved Successfully',
+            'alert-type' => 'success'
+        ); 
+        return redirect()->route('approved.withdraw')->with($notification); 
+ 
+    }
+     // End Method
+
 
 
 

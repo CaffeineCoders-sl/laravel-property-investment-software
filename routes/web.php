@@ -159,6 +159,7 @@ Route::controller(ProfitController::class)->group(function(){
     Route::get('/pending/withdraw', 'PendingWithdraw')->name('pending.withdraw');
     Route::get('/approved/withdraw', 'ApprovedWithdraw')->name('approved.withdraw');
     Route::get('/admin/withdraw/details/{id}', 'AdminWithdrawDetails')->name('admin.withdraw.details');
+    Route::post('/admin/withdraw/status/update/{id}', 'AdminWithdrawStatusUpdate')->name('admin.withdraw.status.update');
  
 });
 
