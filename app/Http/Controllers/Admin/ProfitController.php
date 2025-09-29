@@ -240,6 +240,18 @@ $profits = $properties->map(function ($p) {
      // End Method
 
 
+     public function PendingWithdraw(){
+
+        $withdraws = Withdraw::with(['user','property'])
+                    ->where('status','pending')
+                    ->latest()
+                    ->get();
+        return view('admin.backend.withdraw.pending_withdraw',compact('withdraws'));
+
+     }
+       // End Method
+
+
 
 
 }

@@ -155,6 +155,12 @@ Route::controller(ProfitController::class)->group(function(){
    
 });
 
+Route::controller(ProfitController::class)->group(function(){
+    Route::get('/pending/withdraw', 'PendingWithdraw')->name('pending.withdraw');
+ 
+});
+
+
 
 
 
