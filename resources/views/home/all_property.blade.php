@@ -121,22 +121,22 @@
                     </div>
                     <div class="row gy-4 g-sm-3 g-md-4 justify-content-center">
            
-           
+  @foreach ($allproperty as $item) 
    <div class="col-sm-6 col-lg-6">
 <article class="card property--card border-0">
-<a class="card-img-top " href="//realvest/property/luxury-condominiums">
-    <img src="assets/images/65f96cf6e355d1710845174.png"
+<a class="card-img-top " href="{{ route('property.details',$item->slug) }}">
+    <img src="{{ asset($item->image) }}"
         alt="property-image">
 </a>
 <div class="card-body px-2 py-3 p-md-3 p-xl-4">
     <div class="card-body-top">
         <h5 class="card-title mb-2">
-            <a href="//realvest/property/luxury-condominiums">Luxury Condominiums</a>
+            <a href="{{ route('property.details',$item->slug) }}"> {{ $item->title }}</a>
         </h5>
         <ul class="card-meta card-meta--one">
             <li class="card-meta__item card-meta__item__location">
                 <i class="fas fa-map-marker-alt"></i>
-                <span class="text">New York, USA</span>
+                <span class="text">{{ $item->location->name }}</span>
             </li>
         </ul>
     </div>
@@ -146,40 +146,41 @@
                 <div class="card-progress__thumb" style="width: 100%;"></div>
             </div>
             <span class="card-progress__label fs-12">
-                12 Investors |
-                $144,000.00
-                (100%)
+                {{ $item->total_share }} Investors |
+                ${{ $item->per_share_amount }}
+                ({{ $item->down_payment }}%)
             </span>
         </div>
         <ul class="card-meta card-meta--two">
             <li class="card-meta__item">
                 <div class="text">
-                    25 - 40%
+                    {{ $item->profit_amount }}
                 </div>
                 <span class="subtext">Profit</span>
             </li>
             <li class="card-meta__item">
                 <div class="text">
-                    Repeat (Monthly)
+                    Repeat ({{ $item->repeat_time }})
                 </div>
                 <span class="subtext">Profit Schedule</span>
             </li>
             <li class="card-meta__item">
                 <div class="text">
-                    Yes
+                     {{ $item->capital_back }}
                 </div>
                 <span class="subtext">Capital Back</span>
             </li>
         </ul>
     </div>
     <div class="card-body-bottom mb-4">
-        <a class="btn btn--sm btn--base" href="//realvest/property/luxury-condominiums"
+        <a class="btn btn--sm btn--base" href="{{ route('property.details',$item->slug) }}"
             role="button">Details</a>
-        <span class="card-price">$12,000.00</span>
+        <span class="card-price">$ ${{ $item->per_share_amount }}</span>
     </div>
 </div>
 </article>
 </div>
+@endforeach        
  
 
 

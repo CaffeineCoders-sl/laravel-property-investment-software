@@ -15,10 +15,10 @@
             </div>
         </div>
         <div class="all-property__cards">
-    
+     
    @foreach ($property as $item) 
    <div class="card border-0 property-horizontal--card">
-        <a class="card-img card-img--lg" href="//property/traditional-machiya-townhouse">
+        <a class="card-img card-img--lg" href="{{ route('property.details',$item->slug) }}">
             <img src="{{ asset($item->image) }}"
                 alt="property-image">
         </a>
@@ -72,7 +72,7 @@
                 </ul>
             </div>
             <div class="card-body-bottom">
-                <a class="btn btn--sm btn--base" href=" "
+                <a class="btn btn--sm btn--base" href="{{ route('property.details',$item->slug) }}"
                     role="button">  Details  </a>
                 <span class="card-price">
                     ${{ $item->per_share_amount }}
