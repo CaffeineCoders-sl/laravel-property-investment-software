@@ -185,7 +185,7 @@ Route::controller(ProfitController::class)->group(function(){
 /// This Routes for access all 
  Route::get('/details/{slug}', [PropertyController::class, 'PropertyDetails'])->name('property.details');
 
-
+ Route::get('/property', [PropertyController::class, 'AllPropertyPage'])->name('all.property.page');
 
 
 

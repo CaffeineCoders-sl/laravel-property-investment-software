@@ -26,13 +26,13 @@
                                                                                 </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href=" ">Home</a>
+                        <a class="nav-link active" href="{{ url('/') }}">Home</a>
                     </li>
                                         <li class="nav-item ">
                         <a href=" " class="nav-link">About</a>
                     </li>
                                         <li class="nav-item">
-                        <a class="nav-link " href=" ">Properties</a>
+              <a class="nav-link " href="{{ route('all.property.page') }}">Properties</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " href=" ">Blog</a>
