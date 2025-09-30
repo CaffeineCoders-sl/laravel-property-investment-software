@@ -138,7 +138,7 @@
     <div class="card-body-bottom mb-4">
         <a class="btn btn--sm btn--base" href="{{ route('property.details',$item->slug) }}"
             role="button">Details</a>
-        <span class="card-price">$ ${{ $item->per_share_amount }}</span>
+        <span class="card-price"> ${{ $item->per_share_amount }}</span>
     </div>
 </div>
 </article>
