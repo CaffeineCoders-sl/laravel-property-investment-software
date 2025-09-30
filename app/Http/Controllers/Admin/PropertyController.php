@@ -477,7 +477,8 @@ class PropertyController extends Controller
     public function AllPropertyPage(){
 
     $allproperty = Property::latest()->get();
-    return view('home.all_property',compact('allproperty'));
+    $location = Location::latest()->get();
+    return view('home.all_property',compact('allproperty','location'));
 
     }
      //End Method 

@@ -16,98 +16,61 @@
                     <button class="close-btn" type="button">
                         <i class="fas fa-times"></i>
                     </button>
-                    <form action="//realvest/properties" class="filter-form">
-                        <div class="filter-form__block">
-                            <h6 class="title">Search Property</h6>
-                            <div class="form-group">
-                                <input class="form--control" type="text" name="search" value=""
-                                    placeholder="What are you looking for?">
-                            </div>
-                            <div class="form-group">
-                                <select name="location_id" class="form-control form--control select2 on-change-submit"
-                                    required>
-             <option value="">Select Location</option>   New York, USA</option>
-          <option value="2" >
-    London, England</option>
-                                    <option value="3" >
-    Paris, France</option>
-                                    <option value="4" >
-    Berlin, Germany</option>
-                                    <option value="5" >
-    Tokyo, Japan</option>
-                                    <option value="6" >
-    San Francisco, USA</option>
-                            </select>
-                            </div>
+
+     <form action="{{ route('all.property.page') }}" class="filter-form" method="GET">
+
+         <div class="filter-form__block">
+            <h6 class="title">Search Property</h6>
+            <div class="form-group">
+                <input class="form--control" type="text" name="search" value="{{ old('search', request('search')) }}"
+                    placeholder="What are you looking for?">
+            </div>
+            <div class="form-group">
+       <select name="location_id" class="form-control form--control select2 on-change-submit" required>
+       <option value="" {{ request('location_id') == '' ? 'selected' : '' }}>Select Location</option> 
+        @foreach ($location as $loca) 
+       <option value="{{ $loca->id }}" {{ request('location_id') == $loca->id ? 'selected' : '' }} > {{ $loca->name }}</option>
+        @endforeach   
+     </select>
+           </div>
+
+
     <div class="form-group">
         <select name="invest_type" class="form-control form--control select2 on-change-submit"
             data-minimum-results-for-search="-1" required>
-            <option value="">Investment Type</option>
-        <option value="1" >
-                Onetime Investment                                    </option>
-            <option value="2" >
-                Investment By Installment                                    </option>
+      <option value="" {{ request('invest_type') == '' ? 'selected' : '' }}>Investment Type</option>
+      <option value="One-Time-Investment" {{ request('invest_type') == 'One-Time-Investment' ? 'selected' : '' }} >  Onetime Investment   </option>
+      <option value="Investment-By-Installment" {{ request('invest_type') == 'Investment-By-Installment' ? 'selected' : '' }}> Investment By Installment  </option>
         </select>
     </div>
-                            <div class="form-group">
-                                <select name="profit_schedule" class="form-control form--control select2 on-change-submit"
-                                    data-minimum-results-for-search="-1" required>
-      <option value="">Profit Schedule</option>
-       <option value="3" >
-        One Time      </option>
-    <option value="1" >
-        Lifetime      </option>
-    <option value="2" >
-        Repeated Time        </option>
-    </select>
-                            </div>
+                             
     <div class="form-group">
         <label for="" class="form--label">Capital Back</label>
         <div class="form-check">
-            <input class="form-check-input on-change-submit" name="is_capital_back" type="radio"
-                value="" id="capital-all" checked>
+            <input class="form-check-input " name="is_capital_back" type="radio" value="" id="capital-all" {{ request('is_capital_back') == '' ? 'checked' : '' }} >
+            
             <label class="form-check-label" for="capital-all">
-                All                                    </label>
+                All    </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input on-change-submit" name="is_capital_back" type="radio"
-                value="1" id="capital-yes"
-                >
+            <input class="form-check-input " name="is_capital_back" type="radio" value="1" id="capital-yes" {{ request('is_capital_back') == '1' ? 'checked' : '' }} >
             <label class="form-check-label" for="capital-yes">
-                Yes                                    </label>
+                Yes   </label>
         </div>
         <div class="form-check">
-            <input class="form-check-input on-change-submit" type="radio"
-                value="2" name="is_capital_back" id="capital-no"
-                >
+       <input class="form-check-input" type="radio"
+                value="2" name="is_capital_back" id="capital-no" {{ request('is_capital_back') == '2' ? 'checked' : '' }}>
             <label class="form-check-label" for="capital-no">
                 No                                    </label>
         </div>
     </div>
-    <div class="form-group">
-        <div class="filter-form__block">
-            <label class="form--label">Investment Range</label>
-            <div class="range-slider">
-                <div class="range-slider__inputs">
-                    <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input id="min-range" class="form--control" type="number"
-                            name="minimum_invest" value="">
-                    </div>
-                    <div class="input-group">
-                        <span class="input-group-text">$</span>
-                        <input id="max-range" class="form--control" type="number"
-                            name="maximum_invest" value="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+ 
     </div>
 
-                        <button type="submit" class="btn--sm btn btn-outline--base w-100">
-                            <i class="las la-filter"></i> Filter Now                        </button>
+   <button type="submit" class="btn--sm btn btn-outline--base w-100">
+    <i class="las la-filter"></i> Filter Now   </button>
                     </form>
+
                 </aside>
 
 
