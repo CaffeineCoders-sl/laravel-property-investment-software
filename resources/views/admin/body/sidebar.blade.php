@@ -15,7 +15,7 @@
 
             <ul class="nav nav-main">
                 <li>
-                    <a class="nav-link" href="layouts-default.html">
+                    <a class="nav-link" href="{{ route('admin.dashboard') }}">
                         <i class="bx bx-home-alt" aria-hidden="true"></i>
                         <span>Dashboard</span>
                     </a>                        
@@ -24,7 +24,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-cart-alt" aria-hidden="true"></i>
+        <i class="bx bx-file" aria-hidden="true"></i>
         <span>Investment </span>
     </a>
     <ul class="nav nav-children">
@@ -55,7 +55,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-cart-alt" aria-hidden="true"></i>
+        <i class="bx bx-map" aria-hidden="true"></i>
         <span>Properties </span>
     </a>
     <ul class="nav nav-children">
@@ -81,7 +81,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-file" aria-hidden="true"></i>
+        <i class="bx bx-table" aria-hidden="true"></i>
         <span>Down Payment</span>
     </a>
     <ul class="nav nav-children">
@@ -103,7 +103,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-file" aria-hidden="true"></i>
+        <i class="bx bx-collection" aria-hidden="true"></i>
         <span>Deposits</span>
     </a>
     <ul class="nav nav-children">
@@ -125,7 +125,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-file" aria-hidden="true"></i>
+        <i class="bx bx-book-alt" aria-hidden="true"></i>
         <span>Reports</span>
     </a>
     <ul class="nav nav-children">
@@ -146,7 +146,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-file" aria-hidden="true"></i>
+        <i class="bx bx-cart-alt" aria-hidden="true"></i>
         <span>Profit Withdraw</span>
     </a>
     <ul class="nav nav-children">
@@ -168,7 +168,7 @@
 
 <li class="nav-parent">
     <a class="nav-link" href="#">
-        <i class="bx bx-file" aria-hidden="true"></i>
+        <i class="bx bx-envelope" aria-hidden="true"></i>
         <span>Capital Withdraw</span>
     </a>
     <ul class="nav nav-children">
